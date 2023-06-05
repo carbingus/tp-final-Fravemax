@@ -55,6 +55,12 @@ public class Proveedor {
     public void setTelefono(int telefono) {
         this.telefono = telefono;
     }
+
+    @Override
+    public String toString() {
+        return "Proveedor{" + "id_proveedor=" + id_proveedor + ", razonSocial=" + razonSocial + ", domicilio=" + domicilio + ", telefono=" + telefono + '}';
+    }
+    
     
     
 }

@@ -47,5 +47,12 @@ public class Venta {
     public void setId_cliente(int id_cliente) {
         this.id_cliente = id_cliente;
     }
+
+    @Override
+    public String toString() {
+        return "Venta{" + "id_venta=" + id_venta + ", fecha=" + fecha + ", id_cliente=" + id_cliente + '}';
+    }
+    
+    
     
 }
