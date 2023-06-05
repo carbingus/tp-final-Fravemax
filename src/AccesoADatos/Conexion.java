@@ -21,9 +21,9 @@ public class Conexion {
     
     private static Connection connection;
     
-    private Conexion(){} // metodo constructor
+    private Conexion(){} //
     
-    // aca simplemente generamos una conexion
+
     public static Connection getConexion(){
         if (connection == null){
             try{
@@ -32,11 +32,11 @@ public class Conexion {
                 connection = DriverManager.
                         getConnection(URL+DB, USUARIO, PASSWORD);
             } catch (SQLException ex){
-                JOptionPane.showMessageDialog(null, "Error al conectarse a la Base de Datos " + ex.getMessage());
+                JOptionPane.showMessageDialog(null, "Error al conectarse a la Base de Datos. Codigo: " + ex.getMessage());
 
           
             } catch (ClassNotFoundException ex){
-                JOptionPane.showMessageDialog(null, "Error al cargar los drivers " + ex.getLocalizedMessage());
+                JOptionPane.showMessageDialog(null, "Error al cargar los drivers. Codigo: " + ex.getLocalizedMessage());
 
             }
         }
