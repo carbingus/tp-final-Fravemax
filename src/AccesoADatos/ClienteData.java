@@ -34,7 +34,7 @@ public class ClienteData {
             if (rs.next()) { // verificamos se pueda agregar un cliente en el siguiente lugar disponible
                 cliente.setId_cliente(rs.getInt(1)); //id incremental generado automaticamente por DB
                 JOptionPane.showMessageDialog(null, "Cliente añadido con exito.");
-            } else { // el alumno no se pudo añadir
+            } else { // el cliente no se pudo añadir
                 JOptionPane.showMessageDialog(null, "El cliente no fue añadido.");
             }
 
