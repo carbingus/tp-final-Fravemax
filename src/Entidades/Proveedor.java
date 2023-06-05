@@ -4,10 +4,7 @@
  */
 package Entidades;
 
-/**
- *
- * @author extha
- */
+
 public class Proveedor {
     private int id_proveedor;
     private String razonSocial;

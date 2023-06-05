@@ -4,10 +4,7 @@
  */
 package Entidades;
 
-/**
- *
- * @author extha
- */
+
 public class Cliente {
     private int id_cliente;
     private String apellido;
@@ -25,6 +22,14 @@ public class Cliente {
         this.domicilio = domicilio;
         this.telefono = telefono;
     }
+
+    public Cliente(String apellido, String nombre, String domicilio, int telefono) {
+        this.apellido = apellido;
+        this.nombre = nombre;
+        this.domicilio = domicilio;
+        this.telefono = telefono;
+    }
+    
 
     public int getId_cliente() {
         return id_cliente;

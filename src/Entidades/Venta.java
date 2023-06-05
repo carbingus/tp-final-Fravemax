@@ -6,10 +6,7 @@ package Entidades;
 
 import java.time.LocalDate;
 
-/**
- *
- * @author extha
- */
+
 public class Venta {
     private int id_venta;
     private LocalDate fecha;

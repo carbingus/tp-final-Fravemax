@@ -4,10 +4,7 @@
  */
 package Entidades;
 
-/**
- *
- * @author extha
- */
+
 public class Producto {
     private int id_producto;
     private String descripcion;
