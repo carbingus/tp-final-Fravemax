@@ -44,5 +44,82 @@ public class ClienteData {
             //aca nos indica si hubo un error
         }
         }
+    
+    public Cliente buscarCliente (int id){
+        Cliente cliente = new Cliente();
+        String sql = "SELECT Nombre, Apellido, Domicilio, Telefono  FROM clientes WHERE idCliente = ?";
+        PreparedStatement ps = null;
+        try{
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs.next()){
+                cliente.setId_cliente(id);
+                cliente.setNombre(rs.getString("Nombre"));
+                cliente.setApellido(rs.getString("Apellido"));
+                cliente.setDomicilio(rs.getString("Domicilio"));
+                cliente.setTelefono(rs.getInt("Telefono"));
+                
+            } else{
+                JOptionPane.showMessageDialog(null, "No existe el cliente.");
+            }
+            ps.close();
+        } catch (SQLException ex){
+            JOptionPane.showMessageDialog(null, "Error al acceder a tabla Clientes. Codigo: " + ex.getLocalizedMessage());
+        }
+        return cliente;
     }
+    
+    public Cliente modificarCliente(Cliente cliente){
+        String sql = "UPDATE clientes SET Nombre = ?, Apellido = ?, Domicilio = ?, Telefono = ? WHERE  idCliente = ?";
+        PreparedStatement ps = null;
+        
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1,cliente.getNombre());
+            ps.setString(2, cliente.getApellido());
+            ps.setString(3,cliente.getDomicilio());
+            ps.setInt(4, cliente.getTelefono());
+            ps.setInt(5,cliente.getId_cliente());
+            int logro = ps.executeUpdate();
+            
+            if (logro == 1){
+                JOptionPane.showMessageDialog(null, "Cambios efectuados exitosamente.");
+           } else{
+                JOptionPane.showMessageDialog(null, "El cliente indicado no existe");
+            } 
+            
+        }catch (SQLException ex){
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Clientes. Codigo: " + ex.getLocalizedMessage());
+        }
+        return cliente;
+            
+        }
+    
+    public List<Cliente> listarClientes(){
+        List<Cliente> clientes = new ArrayList<>();
+        try{
+            String sql = "SELECT * FROM clientes";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                Cliente cliente = new Cliente();
+                
+                cliente.setId_cliente(rs.getInt("idCliente"));
+                cliente.setNombre(rs.getString("Nombre"));
+                cliente.setApellido(rs.getString("Apellido"));
+                cliente.setDomicilio(rs.getString("Domicilio"));
+                cliente.setTelefono(rs.getInt("Telefono"));
+                clientes.add(cliente);
+            }
+            ps.close();
+        } catch(SQLException ex){
+            JOptionPane.showMessageDialog(null,"Error al acceder a tabla Cliente. Codigo: " + ex.getLocalizedMessage());
+            
+        }
+        return clientes;
+    }
+}
+
 
