@@ -30,15 +30,15 @@ public class ProductoData {
     }
     
     public void guardarProducto(Producto producto){
-        String sql = "INSERT INTO productos (Nombre, Descripcion, Precio, CantidadProducto) VALUES (?, ?, ?, ?)";
-        
-        try{
-            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, producto.getNombre());
-            ps.setString(2,producto.getDescripcion());
-            ps.setDouble(3, producto.getPrecioActual());
-            ps.setInt(4, producto.getStock());
-        }
+//        String sql = "INSERT INTO productos (Nombre, Descripcion, Precio, CantidadProducto) VALUES (?, ?, ?, ?)";
+//        
+//        try{
+//            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+//            ps.setString(1, producto.getNombre());
+//            ps.setString(2,producto.getDescripcion());
+//            ps.setDouble(3, producto.getPrecioActual());
+//            ps.setInt(4, producto.getStock());
+//        }
     }
     
     
