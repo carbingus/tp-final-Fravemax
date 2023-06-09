@@ -1,12 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
-/**
- *
- * @author extha
- */
 package AccesoADatos;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -21,23 +12,22 @@ public class Conexion {
     
     private static Connection connection;
     
-    private Conexion(){} //
+    private Conexion(){}
     
-
-    public static Connection getConexion(){
-        if (connection == null){
-            try{
+    public static Connection getConexion() {
+        if (connection == null) {
+            try 
+            {
                 Class.forName("org.mariadb.jdbc.Driver");
-                
-                connection = DriverManager.
-                        getConnection(URL+DB, USUARIO, PASSWORD);
-            } catch (SQLException ex){
+                connection = DriverManager.getConnection(URL+DB, USUARIO, PASSWORD);
+            } 
+            catch (SQLException ex) 
+            {
                 JOptionPane.showMessageDialog(null, "Error al conectarse a la Base de Datos. Codigo: " + ex.getMessage());
-
-          
-            } catch (ClassNotFoundException ex){
+            } 
+            catch (ClassNotFoundException ex) 
+            {
                 JOptionPane.showMessageDialog(null, "Error al cargar los drivers. Codigo: " + ex.getLocalizedMessage());
-
             }
         }
     return connection;
