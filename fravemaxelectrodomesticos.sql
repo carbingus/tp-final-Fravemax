@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-06-2023 a las 19:42:35
--- Versión del servidor: 10.4.28-MariaDB
--- Versión de PHP: 8.2.4
+-- Tiempo de generación: 10-06-2023 a las 21:22:24
+-- Versión del servidor: 10.4.27-MariaDB
+-- Versión de PHP: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,10 +24,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `clientes`
+-- Estructura de tabla para la tabla `cliente`
 --
 
-CREATE TABLE `clientes` (
+CREATE TABLE `cliente` (
   `idCliente` int(11) NOT NULL,
   `nombre` varchar(30) NOT NULL,
   `apellido` varchar(30) NOT NULL,
@@ -78,12 +78,12 @@ CREATE TABLE `detalleventa` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `productos`
+-- Estructura de tabla para la tabla `producto`
 --
 
-CREATE TABLE `productos` (
+CREATE TABLE `producto` (
   `idProducto` int(11) NOT NULL,
-  `descripcion` varchar(50) NOT NULL,
+  `nombre` varchar(50) NOT NULL,
   `precio` double NOT NULL,
   `stock` int(11) NOT NULL,
   `estado` tinyint(1) NOT NULL
@@ -119,9 +119,9 @@ CREATE TABLE `venta` (
 --
 
 --
--- Indices de la tabla `clientes`
+-- Indices de la tabla `cliente`
 --
-ALTER TABLE `clientes`
+ALTER TABLE `cliente`
   ADD PRIMARY KEY (`idCliente`);
 
 --
@@ -148,9 +148,9 @@ ALTER TABLE `detalleventa`
   ADD UNIQUE KEY `idProducto` (`idProducto`);
 
 --
--- Indices de la tabla `productos`
+-- Indices de la tabla `producto`
 --
-ALTER TABLE `productos`
+ALTER TABLE `producto`
   ADD PRIMARY KEY (`idProducto`);
 
 --
@@ -171,9 +171,9 @@ ALTER TABLE `venta`
 --
 
 --
--- AUTO_INCREMENT de la tabla `clientes`
+-- AUTO_INCREMENT de la tabla `cliente`
 --
-ALTER TABLE `clientes`
+ALTER TABLE `cliente`
   MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -195,9 +195,9 @@ ALTER TABLE `detalleventa`
   MODIFY `idDetalleVenta` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `productos`
+-- AUTO_INCREMENT de la tabla `producto`
 --
-ALTER TABLE `productos`
+ALTER TABLE `producto`
   MODIFY `idProducto` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -217,48 +217,30 @@ ALTER TABLE `venta`
 --
 
 --
--- Filtros para la tabla `clientes`
---
-ALTER TABLE `clientes`
-  ADD CONSTRAINT `clientes_ibfk_1` FOREIGN KEY (`idCliente`) REFERENCES `venta` (`idCliente`);
-
---
 -- Filtros para la tabla `compra`
 --
 ALTER TABLE `compra`
-  ADD CONSTRAINT `compra_ibfk_1` FOREIGN KEY (`idProvedor`) REFERENCES `proveedor` (`IdProvedor`),
-  ADD CONSTRAINT `compra_ibfk_2` FOREIGN KEY (`idCompra`) REFERENCES `detallecompra` (`idCompra`);
+  ADD CONSTRAINT `compra_ibfk_1` FOREIGN KEY (`idProvedor`) REFERENCES `proveedor` (`idProvedor`);
 
 --
 -- Filtros para la tabla `detallecompra`
 --
 ALTER TABLE `detallecompra`
-  ADD CONSTRAINT `detallecompra_ibfk_1` FOREIGN KEY (`idProducto`) REFERENCES `productos` (`idProducto`);
+  ADD CONSTRAINT `detallecompra_ibfk_1` FOREIGN KEY (`idCompra`) REFERENCES `compra` (`idCompra`),
+  ADD CONSTRAINT `detallecompra_ibfk_2` FOREIGN KEY (`idProducto`) REFERENCES `producto` (`idProducto`);
 
 --
 -- Filtros para la tabla `detalleventa`
 --
 ALTER TABLE `detalleventa`
-  ADD CONSTRAINT `detalleventa_ibfk_1` FOREIGN KEY (`idProducto`) REFERENCES `productos` (`idProducto`);
-
---
--- Filtros para la tabla `productos`
---
-ALTER TABLE `productos`
-  ADD CONSTRAINT `productos_ibfk_1` FOREIGN KEY (`idProducto`) REFERENCES `detalleventa` (`idProducto`);
-
---
--- Filtros para la tabla `proveedor`
---
-ALTER TABLE `proveedor`
-  ADD CONSTRAINT `proveedor_ibfk_1` FOREIGN KEY (`idProvedor`) REFERENCES `compra` (`idProvedor`);
+  ADD CONSTRAINT `detalleventa_ibfk_1` FOREIGN KEY (`idVenta`) REFERENCES `venta` (`idVenta`),
+  ADD CONSTRAINT `detalleventa_ibfk_2` FOREIGN KEY (`idProducto`) REFERENCES `producto` (`idProducto`);
 
 --
 -- Filtros para la tabla `venta`
 --
 ALTER TABLE `venta`
-  ADD CONSTRAINT `venta_ibfk_1` FOREIGN KEY (`idCliente`) REFERENCES `clientes` (`idCliente`),
-  ADD CONSTRAINT `venta_ibfk_2` FOREIGN KEY (`idVenta`) REFERENCES `detalleventa` (`idVenta`);
+  ADD CONSTRAINT `venta_ibfk_2` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`idCliente`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
