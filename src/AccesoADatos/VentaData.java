@@ -21,6 +21,8 @@ import AccesoADatos.*;
 public class VentaData {
     
     private Connection con = null;
+    private ProductoData prodData = new ProductoData();
+    private ClienteData cliData = new ClienteData();
 
     public VentaData() {
         con = Conexion.getConexion();
@@ -47,5 +49,35 @@ public class VentaData {
             JOptionPane.showMessageDialog(null, "Error al acceder a tabla DetalleVenta. Codigo: " + ex.getLocalizedMessage());
         }
     }
+     
+     public List<Venta> obtenerVentas(){
+         List <Venta> ventas = new ArrayList<>();
+         
+         try {
+            String sql = "SELECT * FROM detalleventa;";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            Venta vend;
+
+            while (rs.next()){
+                vend = new Venta();
+                vend.setId_venta(rs.getInt("idDetalleVenta"));
+                
+                Producto p = prodData.buscarProducto(rs.getInt("idProducto"));
+                vend.setProducto(p);
+                
+                Cliente c = cliData.buscarCliente(rs.getInt("idCliente"));
+                vend.setCliente(c);
+                
+                vend.setFecha(rs.getDate("fecha").toLocalDate());
+                
+            }
+            ps.close();
+            } catch (SQLException ex){
+                JOptionPane.showMessageDialog(null, "Error al acceder a tabla DetalleVenta. Codigo: "+ex.getLocalizedMessage());
+
+            }
+         return ventas;
+     }
     
 }
