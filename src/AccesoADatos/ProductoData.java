@@ -29,7 +29,7 @@ public class ProductoData {
     }
     
     public void registrarProducto(Producto producto){
-        String sql = "INSERT INTO productos (nombre, precio, cantidadProducto, estado) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO producto (nombre, precio, cantidadProducto, estado) VALUES (?, ?, ?, ?)";
         
         try{
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -57,7 +57,7 @@ public class ProductoData {
     
     public Producto buscarProducto (int id){
         Producto producto = new Producto();
-        String sql = "SELECT nombre, precio, stock, estado FROM productos WHERE idProducto = ?";
+        String sql = "SELECT nombre, precio, stock, estado FROM producto WHERE idProducto = ?";
         PreparedStatement ps = null;
         try{
             ps = con.prepareStatement(sql);
@@ -84,7 +84,7 @@ public class ProductoData {
     }
     
     public Producto modificarProducto (Producto producto){
-        String sql = "UPDATE productos SET nombre = ?, precio = ?, stock = ?, estado = ? WHERE idProducto = ?";
+        String sql = "UPDATE producto SET nombre = ?, precio = ?, stock = ?, estado = ? WHERE idProducto = ?";
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement(sql);
