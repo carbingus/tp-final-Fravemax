@@ -72,11 +72,9 @@ public class ProveedorData {
         return proveedor;
     }
     
-    public List<Proveedor> listarProveedor(){
+    public List<Proveedor> listarProveedor(int id){
         List<Proveedor> proveedores = new ArrayList<>();
-        
-        //TODO:
-        
+
         try{
             String sql = "SELECT * FROM proveedor";
             PreparedStatement ps = con.prepareStatement(sql);
@@ -96,6 +94,31 @@ public class ProveedorData {
         }
         
         return proveedores;
+    }
+    
+    public Proveedor buscarProveedor(int id){
+        Proveedor proveedor = new Proveedor();
+        String sql = "SELECT razonSocial, domicilio, telefono FROM proveedor WHERE idProveedor = ?;";
+        PreparedStatement ps = null;
+        
+        try{
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()){
+                proveedor.setId_proveedor(id);
+                proveedor.setRazonSocial(rs.getString("razonSocial"));
+                proveedor.setDomicilio(rs.getString("domicilio"));
+                proveedor.setTelefono(rs.getInt("telefono"));
+                
+            } else {
+                JOptionPane.showMessageDialog(null, "No existe el proveedor indicado.");
+            }
+            ps.close();
+        } catch (SQLException ex){
+            JOptionPane.showMessageDialog(null, "Error al acceder a tabla Proveedor. Codigo: " +ex.getLocalizedMessage());
+        }
+        return proveedor;
     }
     
 }
