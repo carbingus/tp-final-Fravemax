@@ -1,9 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Entidades;
-
 
 public class Proveedor {
     private int id_proveedor;
@@ -12,6 +7,12 @@ public class Proveedor {
     private int telefono;
 
     public Proveedor() {
+    }
+
+    public Proveedor(String razonSocial, String domicilio, int telefono) {
+        this.razonSocial = razonSocial;
+        this.domicilio = domicilio;
+        this.telefono = telefono;
     }
 
     public Proveedor(int id_proveedor, String razonSocial, String domicilio, int telefono) {
@@ -57,7 +58,5 @@ public class Proveedor {
     public String toString() {
         return "Proveedor{" + "id_proveedor=" + id_proveedor + ", razonSocial=" + razonSocial + ", domicilio=" + domicilio + ", telefono=" + telefono + '}';
     }
-    
-    
     
 }

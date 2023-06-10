@@ -1,9 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Entidades;
-
 
 public class Cliente {
     private int id_cliente;
@@ -30,7 +25,6 @@ public class Cliente {
         this.telefono = telefono;
     }
     
-
     public int getId_cliente() {
         return id_cliente;
     }
@@ -75,6 +69,5 @@ public class Cliente {
     public String toString() {
         return "Cliente{" + "id_cliente=" + id_cliente + ", apellido=" + apellido + ", nombre=" + nombre + ", domicilio=" + domicilio + ", telefono=" + telefono + '}';
     }
-    
     
 }
