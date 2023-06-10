@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-06-2023 a las 00:23:07
+-- Tiempo de generación: 10-06-2023 a las 19:15:41
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -28,11 +28,11 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `clientes` (
-  `IdCliente` int(11) NOT NULL,
-  `Nombre` varchar(30) NOT NULL,
-  `Apellido` varchar(30) NOT NULL,
-  `Domicilio` varchar(50) NOT NULL,
-  `Telefono` int(11) NOT NULL
+  `idCliente` int(11) NOT NULL,
+  `nombre` varchar(30) NOT NULL,
+  `apellido` varchar(30) NOT NULL,
+  `domicilio` varchar(50) NOT NULL,
+  `telefono` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -42,9 +42,9 @@ CREATE TABLE `clientes` (
 --
 
 CREATE TABLE `compra` (
-  `IdCompra` int(11) NOT NULL,
-  `IdProvedor` int(11) NOT NULL,
-  `Fecha` date NOT NULL
+  `idCompra` int(11) NOT NULL,
+  `idProvedor` int(11) NOT NULL,
+  `fecha` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -54,11 +54,11 @@ CREATE TABLE `compra` (
 --
 
 CREATE TABLE `detallecompra` (
-  `IdDetalle` int(11) NOT NULL,
+  `idDetalle` int(11) NOT NULL,
   `cantidad` int(11) NOT NULL,
-  `PrecioCosto` double NOT NULL,
-  `IdCompra` int(11) NOT NULL,
-  `IdProducto` int(11) NOT NULL
+  `precioCosto` double NOT NULL,
+  `idCompra` int(11) NOT NULL,
+  `idProducto` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -68,11 +68,11 @@ CREATE TABLE `detallecompra` (
 --
 
 CREATE TABLE `detalleventa` (
-  `IdDetalleVenta` int(11) NOT NULL,
+  `idDetalleVenta` int(11) NOT NULL,
   `cantidad` int(11) NOT NULL,
-  `PrecioVenta` double NOT NULL,
-  `IdVenta` int(11) NOT NULL,
-  `IdProducto` int(11) NOT NULL
+  `precioVenta` double NOT NULL,
+  `idVenta` int(11) NOT NULL,
+  `idProducto` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -82,11 +82,12 @@ CREATE TABLE `detalleventa` (
 --
 
 CREATE TABLE `productos` (
-  `IdProducto` int(11) NOT NULL,
-  `Nombre` varchar(50) NOT NULL,
-  `Descripción` varchar(50) NOT NULL,
-  `Precio` double NOT NULL,
-  `CantidadProducto` int(11) NOT NULL
+  `idProducto` int(11) NOT NULL,
+  `nombre` varchar(50) NOT NULL,
+  `descripcion` varchar(50) NOT NULL,
+  `precio` double NOT NULL,
+  `stock` int(11) NOT NULL,
+  `estado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -96,10 +97,10 @@ CREATE TABLE `productos` (
 --
 
 CREATE TABLE `proveedor` (
-  `IdProvedor` int(11) NOT NULL,
-  `RazonSocial` varchar(30) NOT NULL,
-  `Domicilio` varchar(50) NOT NULL,
-  `Telefono` int(11) NOT NULL
+  `idProvedor` int(11) NOT NULL,
+  `razonSocial` varchar(30) NOT NULL,
+  `domicilio` varchar(50) NOT NULL,
+  `telefono` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -109,9 +110,9 @@ CREATE TABLE `proveedor` (
 --
 
 CREATE TABLE `venta` (
-  `IdVenta` int(11) NOT NULL,
+  `idVenta` int(11) NOT NULL,
   `fecha` date NOT NULL,
-  `IdCliente` int(11) NOT NULL
+  `idCliente` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -122,49 +123,49 @@ CREATE TABLE `venta` (
 -- Indices de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  ADD PRIMARY KEY (`IdCliente`);
+  ADD PRIMARY KEY (`idCliente`);
 
 --
 -- Indices de la tabla `compra`
 --
 ALTER TABLE `compra`
-  ADD PRIMARY KEY (`IdCompra`),
-  ADD UNIQUE KEY `IdProvedor` (`IdProvedor`);
+  ADD PRIMARY KEY (`idCompra`),
+  ADD UNIQUE KEY `idProvedor` (`idProvedor`);
 
 --
 -- Indices de la tabla `detallecompra`
 --
 ALTER TABLE `detallecompra`
-  ADD PRIMARY KEY (`IdDetalle`),
-  ADD UNIQUE KEY `IdCompra` (`IdCompra`,`IdProducto`),
-  ADD KEY `IdProducto` (`IdProducto`);
+  ADD PRIMARY KEY (`idDetalle`),
+  ADD UNIQUE KEY `idCompra` (`idCompra`),
+  ADD UNIQUE KEY `idProducto` (`idProducto`);
 
 --
 -- Indices de la tabla `detalleventa`
 --
 ALTER TABLE `detalleventa`
-  ADD PRIMARY KEY (`IdDetalleVenta`),
-  ADD UNIQUE KEY `IdVenta` (`IdVenta`,`IdProducto`),
-  ADD KEY `IdProducto` (`IdProducto`);
+  ADD PRIMARY KEY (`idDetalleVenta`),
+  ADD UNIQUE KEY `idVenta` (`idVenta`),
+  ADD UNIQUE KEY `idProducto` (`idProducto`);
 
 --
 -- Indices de la tabla `productos`
 --
 ALTER TABLE `productos`
-  ADD PRIMARY KEY (`IdProducto`);
+  ADD PRIMARY KEY (`idProducto`);
 
 --
 -- Indices de la tabla `proveedor`
 --
 ALTER TABLE `proveedor`
-  ADD PRIMARY KEY (`IdProvedor`);
+  ADD PRIMARY KEY (`idProvedor`);
 
 --
 -- Indices de la tabla `venta`
 --
 ALTER TABLE `venta`
-  ADD PRIMARY KEY (`IdVenta`),
-  ADD UNIQUE KEY `IdCliente` (`IdCliente`);
+  ADD PRIMARY KEY (`idVenta`),
+  ADD UNIQUE KEY `idCliente` (`idCliente`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -174,43 +175,43 @@ ALTER TABLE `venta`
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `IdCliente` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `compra`
 --
 ALTER TABLE `compra`
-  MODIFY `IdCompra` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idCompra` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `detallecompra`
 --
 ALTER TABLE `detallecompra`
-  MODIFY `IdDetalle` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idDetalle` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `detalleventa`
 --
 ALTER TABLE `detalleventa`
-  MODIFY `IdDetalleVenta` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idDetalleVenta` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `IdProducto` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idProducto` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `proveedor`
 --
 ALTER TABLE `proveedor`
-  MODIFY `IdProvedor` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idProvedor` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `venta`
 --
 ALTER TABLE `venta`
-  MODIFY `IdVenta` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idVenta` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Restricciones para tablas volcadas
@@ -220,46 +221,45 @@ ALTER TABLE `venta`
 -- Filtros para la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  ADD CONSTRAINT `clientes_ibfk_1` FOREIGN KEY (`IdCliente`) REFERENCES `venta` (`IdCliente`);
+  ADD CONSTRAINT `clientes_ibfk_1` FOREIGN KEY (`idCliente`) REFERENCES `venta` (`idCliente`);
 
 --
 -- Filtros para la tabla `compra`
 --
 ALTER TABLE `compra`
-  ADD CONSTRAINT `compra_ibfk_1` FOREIGN KEY (`IdCompra`) REFERENCES `detallecompra` (`IdCompra`),
-  ADD CONSTRAINT `compra_ibfk_2` FOREIGN KEY (`IdProvedor`) REFERENCES `proveedor` (`IdProvedor`);
+  ADD CONSTRAINT `compra_ibfk_1` FOREIGN KEY (`idProvedor`) REFERENCES `proveedor` (`IdProvedor`),
+  ADD CONSTRAINT `compra_ibfk_2` FOREIGN KEY (`idCompra`) REFERENCES `detallecompra` (`idCompra`);
 
 --
 -- Filtros para la tabla `detallecompra`
 --
 ALTER TABLE `detallecompra`
-  ADD CONSTRAINT `detallecompra_ibfk_1` FOREIGN KEY (`IdProducto`) REFERENCES `productos` (`IdProducto`);
+  ADD CONSTRAINT `detallecompra_ibfk_1` FOREIGN KEY (`idProducto`) REFERENCES `productos` (`idProducto`);
 
 --
 -- Filtros para la tabla `detalleventa`
 --
 ALTER TABLE `detalleventa`
-  ADD CONSTRAINT `detalleventa_ibfk_1` FOREIGN KEY (`IdProducto`) REFERENCES `productos` (`IdProducto`),
-  ADD CONSTRAINT `detalleventa_ibfk_2` FOREIGN KEY (`IdVenta`) REFERENCES `venta` (`IdVenta`);
+  ADD CONSTRAINT `detalleventa_ibfk_1` FOREIGN KEY (`idProducto`) REFERENCES `productos` (`idProducto`);
 
 --
 -- Filtros para la tabla `productos`
 --
 ALTER TABLE `productos`
-  ADD CONSTRAINT `productos_ibfk_1` FOREIGN KEY (`IdProducto`) REFERENCES `detallecompra` (`IdProducto`);
+  ADD CONSTRAINT `productos_ibfk_1` FOREIGN KEY (`idProducto`) REFERENCES `detalleventa` (`idProducto`);
 
 --
 -- Filtros para la tabla `proveedor`
 --
 ALTER TABLE `proveedor`
-  ADD CONSTRAINT `proveedor_ibfk_1` FOREIGN KEY (`IdProvedor`) REFERENCES `compra` (`IdProvedor`);
+  ADD CONSTRAINT `proveedor_ibfk_1` FOREIGN KEY (`idProvedor`) REFERENCES `compra` (`idProvedor`);
 
 --
 -- Filtros para la tabla `venta`
 --
 ALTER TABLE `venta`
-  ADD CONSTRAINT `venta_ibfk_1` FOREIGN KEY (`IdCliente`) REFERENCES `clientes` (`IdCliente`),
-  ADD CONSTRAINT `venta_ibfk_2` FOREIGN KEY (`IdVenta`) REFERENCES `detalleventa` (`IdVenta`);
+  ADD CONSTRAINT `venta_ibfk_1` FOREIGN KEY (`idCliente`) REFERENCES `clientes` (`idCliente`),
+  ADD CONSTRAINT `venta_ibfk_2` FOREIGN KEY (`idVenta`) REFERENCES `detalleventa` (`idVenta`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
