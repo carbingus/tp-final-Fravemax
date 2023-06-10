@@ -1,23 +1,23 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Entidades;
 
 import java.time.LocalDate;
 
-
 public class Compra {
     private int id_compra;
-    private int id_proveedor;
+    private Proveedor proveedor;
     private LocalDate fecha;
 
     public Compra() {
     }
 
-    public Compra(int id_compra, int id_proveedor, LocalDate fecha) {
+    public Compra(Proveedor proveedor, LocalDate fecha) {
+        this.proveedor = proveedor;
+        this.fecha = fecha;
+    }
+
+    public Compra(int id_compra, Proveedor proveedor, LocalDate fecha) {
         this.id_compra = id_compra;
-        this.id_proveedor = id_proveedor;
+        this.proveedor = proveedor;
         this.fecha = fecha;
     }
 
@@ -29,12 +29,12 @@ public class Compra {
         this.id_compra = id_compra;
     }
 
-    public int getId_proveedor() {
-        return id_proveedor;
+    public Proveedor getProveedor() {
+        return proveedor;
     }
 
-    public void setId_proveedor(int id_proveedor) {
-        this.id_proveedor = id_proveedor;
+    public void setProveedor(Proveedor proveedor) {
+        this.proveedor = proveedor;
     }
 
     public LocalDate getFecha() {
@@ -47,8 +47,7 @@ public class Compra {
 
     @Override
     public String toString() {
-        return "Compra{" + "id_compra=" + id_compra + ", id_proveedor=" + id_proveedor + ", fecha=" + fecha + '}';
+        return "Compra{" + "id_compra=" + id_compra + ", proveedor=" + proveedor + ", fecha=" + fecha + '}';
     }
-    
     
 }
