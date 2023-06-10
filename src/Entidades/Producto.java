@@ -1,46 +1,28 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Entidades;
-
 
 public class Producto {
     private int id_producto;
     private String nombre;
     private String descripcion;
-    private double precioActual;
+    private double precio;
     private int stock;
-    private boolean estado;
 
     public Producto() {
     }
 
-    public Producto(int id_producto, String nombre, String descripcion, double precioActual, int stock, boolean estado) {
+    public Producto(String nombre, String descripcion, double precio, int stock) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.precio = precio;
+        this.stock = stock;
+    }
+
+    public Producto(int id_producto, String nombre, String descripcion, double precio, int stock) {
         this.id_producto = id_producto;
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.precioActual = precioActual;
+        this.precio = precio;
         this.stock = stock;
-        this.estado = estado;
-    }
-
-    public Producto(String nombre, String descripcion, double precioActual, int stock, boolean estado) {
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.precioActual = precioActual;
-        this.stock = stock;
-        this.estado = estado;
-    }
-    
-    
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
     }
 
     public int getId_producto() {
@@ -51,6 +33,14 @@ public class Producto {
         this.id_producto = id_producto;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
     public String getDescripcion() {
         return descripcion;
     }
@@ -59,12 +49,12 @@ public class Producto {
         this.descripcion = descripcion;
     }
 
-    public double getPrecioActual() {
-        return precioActual;
+    public double getPrecio() {
+        return precio;
     }
 
-    public void setPrecioActual(double precioActual) {
-        this.precioActual = precioActual;
+    public void setPrecio(double precio) {
+        this.precio = precio;
     }
 
     public int getStock() {
@@ -75,18 +65,9 @@ public class Producto {
         this.stock = stock;
     }
 
-    public boolean isEstado() {
-        return estado;
-    }
-
-    public void setEstado(boolean estado) {
-        this.estado = estado;
-    }
-
     @Override
     public String toString() {
-        return "Producto{" + "id_producto=" + id_producto + ", descripcion=" + descripcion + ", precioActual=" + precioActual + ", stock=" + stock + ", estado=" + estado + '}';
+        return "Producto{" + "id_producto=" + id_producto + ", nombre=" + nombre + ", descripcion=" + descripcion + ", precio=" + precio + ", stock=" + stock + '}';
     }
-    
     
 }
