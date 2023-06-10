@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-06-2023 a las 19:15:41
+-- Tiempo de generación: 10-06-2023 a las 19:42:35
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -83,7 +83,6 @@ CREATE TABLE `detalleventa` (
 
 CREATE TABLE `productos` (
   `idProducto` int(11) NOT NULL,
-  `nombre` varchar(50) NOT NULL,
   `descripcion` varchar(50) NOT NULL,
   `precio` double NOT NULL,
   `stock` int(11) NOT NULL,
