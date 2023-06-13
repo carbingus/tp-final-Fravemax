@@ -1,33 +1,33 @@
 package Entidades;
 
 public class Proveedor {
-    private int id_proveedor;
+    private int idProveedor;
     private String razonSocial;
     private String domicilio;
-    private int telefono;
+    private String telefono;
 
     public Proveedor() {
     }
 
-    public Proveedor(String razonSocial, String domicilio, int telefono) {
+    public Proveedor(String razonSocial, String domicilio, String telefono) {
         this.razonSocial = razonSocial;
         this.domicilio = domicilio;
         this.telefono = telefono;
     }
 
-    public Proveedor(int id_proveedor, String razonSocial, String domicilio, int telefono) {
-        this.id_proveedor = id_proveedor;
+    public Proveedor(int idProveedor, String razonSocial, String domicilio, String telefono) {
+        this.idProveedor = idProveedor;
         this.razonSocial = razonSocial;
         this.domicilio = domicilio;
         this.telefono = telefono;
     }
 
-    public int getId_proveedor() {
-        return id_proveedor;
+    public int getIdProveedor() {
+        return idProveedor;
     }
 
-    public void setId_proveedor(int id_proveedor) {
-        this.id_proveedor = id_proveedor;
+    public void setIdProveedor(int idProveedor) {
+        this.idProveedor = idProveedor;
     }
 
     public String getRazonSocial() {
@@ -46,17 +46,17 @@ public class Proveedor {
         this.domicilio = domicilio;
     }
 
-    public int getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
     @Override
     public String toString() {
-        return "Proveedor{" + "id_proveedor=" + id_proveedor + ", razonSocial=" + razonSocial + ", domicilio=" + domicilio + ", telefono=" + telefono + '}';
+        return "Proveedor{" + "idProveedor=" + idProveedor + ", razonSocial=" + razonSocial + ", domicilio=" + domicilio + ", telefono=" + telefono + '}';
     }
     
 }

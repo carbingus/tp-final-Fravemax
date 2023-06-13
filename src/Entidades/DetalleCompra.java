@@ -1,7 +1,7 @@
 package Entidades;
 
 public class DetalleCompra {
-    private int id_detalle;
+    private int idDetalle;
     private int cantidad;
     private double precioCosto;
     private Compra compra;
@@ -17,20 +17,20 @@ public class DetalleCompra {
         this.producto = producto;
     }
 
-    public DetalleCompra(int id_detalle, int cantidad, double precioCosto, Compra compra, Producto producto) {
-        this.id_detalle = id_detalle;
+    public DetalleCompra(int idDetalle, int cantidad, double precioCosto, Compra compra, Producto producto) {
+        this.idDetalle = idDetalle;
         this.cantidad = cantidad;
         this.precioCosto = precioCosto;
         this.compra = compra;
         this.producto = producto;
     }
 
-    public int getId_detalle() {
-        return id_detalle;
+    public int getIdDetalle() {
+        return idDetalle;
     }
 
-    public void setId_detalle(int id_detalle) {
-        this.id_detalle = id_detalle;
+    public void setIdDetalle(int idDetalle) {
+        this.idDetalle = idDetalle;
     }
 
     public int getCantidad() {
@@ -67,7 +67,7 @@ public class DetalleCompra {
 
     @Override
     public String toString() {
-        return "DetalleCompra{" + "id_detalle=" + id_detalle + ", cantidad=" + cantidad + ", precioCosto=" + precioCosto + ", compra=" + compra + ", producto=" + producto + '}';
+        return "DetalleCompra{" + "idDetalle=" + idDetalle + ", cantidad=" + cantidad + ", precioCosto=" + precioCosto + ", compra=" + compra + ", producto=" + producto + '}';
     }
     
 }

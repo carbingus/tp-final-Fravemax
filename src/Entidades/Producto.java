@@ -1,36 +1,33 @@
 package Entidades;
 
 public class Producto {
-    private int id_producto;
+    private int idProducto;
     private String nombre;
     private double precio;
     private int stock;
-    private boolean estado;
 
     public Producto() {
     }
 
-    public Producto(String nombre, double precio, int stock, boolean estado) {
+    public Producto(String nombre, double precio, int stock) {
         this.nombre = nombre;
         this.precio = precio;
         this.stock = stock;
-        this.estado = estado;
     }
 
-    public Producto(int id_producto, String nombre, double precio, int stock, boolean estado) {
-        this.id_producto = id_producto;
+    public Producto(int idProducto, String nombre, double precio, int stock) {
+        this.idProducto = idProducto;
         this.nombre = nombre;
         this.precio = precio;
         this.stock = stock;
-        this.estado = estado;
     }
 
-    public int getId_producto() {
-        return id_producto;
+    public int getIdProducto() {
+        return idProducto;
     }
 
-    public void setId_producto(int id_producto) {
-        this.id_producto = id_producto;
+    public void setIdProducto(int idProducto) {
+        this.idProducto = idProducto;
     }
 
     public String getNombre() {
@@ -57,17 +54,9 @@ public class Producto {
         this.stock = stock;
     }
 
-    public boolean isEstado() {
-        return estado;
-    }
-
-    public void setEstado(boolean estado) {
-        this.estado = estado;
-    }
-
     @Override
     public String toString() {
-        return "Producto{" + "id_producto=" + id_producto + ", nombre=" + nombre + ", precio=" + precio + ", stock=" + stock + ", estado=" + estado + '}';
+        return "Producto{" + "idProducto=" + idProducto + ", nombre=" + nombre + ", precio=" + precio + ", stock=" + stock + '}';
     }
     
 }

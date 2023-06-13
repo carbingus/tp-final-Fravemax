@@ -3,4 +3,5 @@ jcalendar-1.4.jar
 mariadb-java-client-2.3.0_6.jar
 /build/
 /dist/
-nbproject/private/private.xml
+/nbproject/private/
+nbproject/project.properties

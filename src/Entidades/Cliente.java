@@ -1,44 +1,44 @@
 package Entidades;
 
 public class Cliente {
-    private int id_cliente;
-    private String apellido;
+    private int idCliente;
+    private int dni;
     private String nombre;
     private String domicilio;
-    private int telefono;
+    private String telefono;
 
     public Cliente() {
     }
 
-    public Cliente(int id_cliente, String apellido, String nombre, String domicilio, int telefono) {
-        this.id_cliente = id_cliente;
-        this.apellido = apellido;
+    public Cliente(int dni, String nombre, String domicilio, String telefono) {
+        this.dni = dni;
         this.nombre = nombre;
         this.domicilio = domicilio;
         this.telefono = telefono;
     }
 
-    public Cliente(String apellido, String nombre, String domicilio, int telefono) {
-        this.apellido = apellido;
+    public Cliente(int idCliente, int dni, String nombre, String domicilio, String telefono) {
+        this.idCliente = idCliente;
+        this.dni = dni;
         this.nombre = nombre;
         this.domicilio = domicilio;
         this.telefono = telefono;
     }
-    
-    public int getId_cliente() {
-        return id_cliente;
+
+    public int getIdCliente() {
+        return idCliente;
     }
 
-    public void setId_cliente(int id_cliente) {
-        this.id_cliente = id_cliente;
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
     }
 
-    public String getApellido() {
-        return apellido;
+    public int getDni() {
+        return dni;
     }
 
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
+    public void setDni(int dni) {
+        this.dni = dni;
     }
 
     public String getNombre() {
@@ -57,17 +57,17 @@ public class Cliente {
         this.domicilio = domicilio;
     }
 
-    public int getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
     @Override
     public String toString() {
-        return "Cliente{" + "id_cliente=" + id_cliente + ", apellido=" + apellido + ", nombre=" + nombre + ", domicilio=" + domicilio + ", telefono=" + telefono + '}';
+        return "Cliente{" + "idCliente=" + idCliente + ", dni=" + dni + ", nombre=" + nombre + ", domicilio=" + domicilio + ", telefono=" + telefono + '}';
     }
     
 }

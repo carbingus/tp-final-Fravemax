@@ -3,42 +3,30 @@ package Entidades;
 import java.time.LocalDate;
 
 public class Venta {
-    private int id_venta;
+    private int idVenta;
     private LocalDate fecha;
     private Cliente cliente;
-    private Producto producto;
 
     public Venta() {
     }
 
-    public Venta(LocalDate fecha, Cliente cliente, Producto producto) {
+    public Venta(LocalDate fecha, Cliente cliente) {
         this.fecha = fecha;
         this.cliente = cliente;
-        this.producto = producto;
     }
 
-    public Venta(int id_venta, LocalDate fecha, Cliente cliente, Producto producto) {
-        this.id_venta = id_venta;
+    public Venta(int idVenta, LocalDate fecha, Cliente cliente) {
+        this.idVenta = idVenta;
         this.fecha = fecha;
         this.cliente = cliente;
-        this.producto = producto;
     }
 
-    public Producto getProducto() {
-        return producto;
+    public int getIdVenta() {
+        return idVenta;
     }
 
-    public void setProducto(Producto producto) {
-        this.producto = producto;
-    }
-    
-
-    public int getId_venta() {
-        return id_venta;
-    }
-
-    public void setId_venta(int id_venta) {
-        this.id_venta = id_venta;
+    public void setIdVenta(int idVenta) {
+        this.idVenta = idVenta;
     }
 
     public LocalDate getFecha() {
@@ -59,7 +47,7 @@ public class Venta {
 
     @Override
     public String toString() {
-        return "Venta{" + "id_venta=" + id_venta + ", fecha=" + fecha + ", cliente=" + cliente + '}';
+        return "Venta{" + "idVenta=" + idVenta + ", fecha=" + fecha + ", cliente=" + cliente + '}';
     }
     
 }

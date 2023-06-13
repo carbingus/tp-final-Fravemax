@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-06-2023 a las 21:22:24
+-- Tiempo de generación: 13-06-2023 a las 23:25:47
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 8.2.0
 
@@ -29,10 +29,10 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `cliente` (
   `idCliente` int(11) NOT NULL,
+  `dni` int(11) NOT NULL,
   `nombre` varchar(30) NOT NULL,
-  `apellido` varchar(30) NOT NULL,
   `domicilio` varchar(50) NOT NULL,
-  `telefono` int(11) NOT NULL
+  `telefono` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -56,7 +56,7 @@ CREATE TABLE `compra` (
 CREATE TABLE `detallecompra` (
   `idDetalle` int(11) NOT NULL,
   `cantidad` int(11) NOT NULL,
-  `precioCosto` double NOT NULL,
+  `precioCosto` double DEFAULT NULL,
   `idCompra` int(11) NOT NULL,
   `idProducto` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -70,7 +70,7 @@ CREATE TABLE `detallecompra` (
 CREATE TABLE `detalleventa` (
   `idDetalleVenta` int(11) NOT NULL,
   `cantidad` int(11) NOT NULL,
-  `precioVenta` double NOT NULL,
+  `precioVenta` double DEFAULT NULL,
   `idVenta` int(11) NOT NULL,
   `idProducto` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -84,9 +84,8 @@ CREATE TABLE `detalleventa` (
 CREATE TABLE `producto` (
   `idProducto` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL,
-  `precio` double NOT NULL,
-  `stock` int(11) NOT NULL,
-  `estado` tinyint(1) NOT NULL
+  `precio` double DEFAULT NULL,
+  `stock` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -99,7 +98,7 @@ CREATE TABLE `proveedor` (
   `idProvedor` int(11) NOT NULL,
   `razonSocial` varchar(30) NOT NULL,
   `domicilio` varchar(50) NOT NULL,
-  `telefono` int(11) NOT NULL
+  `telefono` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -122,7 +121,8 @@ CREATE TABLE `venta` (
 -- Indices de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  ADD PRIMARY KEY (`idCliente`);
+  ADD PRIMARY KEY (`idCliente`),
+  ADD UNIQUE KEY `dni` (`dni`);
 
 --
 -- Indices de la tabla `compra`
