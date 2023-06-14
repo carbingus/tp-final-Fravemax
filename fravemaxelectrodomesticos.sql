@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-06-2023 a las 23:25:47
+-- Tiempo de generación: 14-06-2023 a las 02:37:18
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 8.2.0
 
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `cliente` (
   `idCliente` int(11) NOT NULL,
-  `dni` int(11) NOT NULL,
+  `apellido` varchar(30) NOT NULL,
   `nombre` varchar(30) NOT NULL,
   `domicilio` varchar(50) NOT NULL,
   `telefono` varchar(15) NOT NULL
@@ -121,8 +121,7 @@ CREATE TABLE `venta` (
 -- Indices de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  ADD PRIMARY KEY (`idCliente`),
-  ADD UNIQUE KEY `dni` (`dni`);
+  ADD PRIMARY KEY (`idCliente`);
 
 --
 -- Indices de la tabla `compra`

@@ -2,7 +2,7 @@ package Entidades;
 
 public class Cliente {
     private int idCliente;
-    private int dni;
+    private String apellido;
     private String nombre;
     private String domicilio;
     private String telefono;
@@ -10,16 +10,16 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(int dni, String nombre, String domicilio, String telefono) {
-        this.dni = dni;
+    public Cliente(String apellido, String nombre, String domicilio, String telefono) {
+        this.apellido = apellido;
         this.nombre = nombre;
         this.domicilio = domicilio;
         this.telefono = telefono;
     }
 
-    public Cliente(int idCliente, int dni, String nombre, String domicilio, String telefono) {
+    public Cliente(int idCliente, String apellido, String nombre, String domicilio, String telefono) {
         this.idCliente = idCliente;
-        this.dni = dni;
+        this.apellido = apellido;
         this.nombre = nombre;
         this.domicilio = domicilio;
         this.telefono = telefono;
@@ -33,12 +33,12 @@ public class Cliente {
         this.idCliente = idCliente;
     }
 
-    public int getDni() {
-        return dni;
+    public String getApellido() {
+        return apellido;
     }
 
-    public void setDni(int dni) {
-        this.dni = dni;
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
 
     public String getNombre() {
@@ -67,7 +67,7 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return "Cliente{" + "idCliente=" + idCliente + ", dni=" + dni + ", nombre=" + nombre + ", domicilio=" + domicilio + ", telefono=" + telefono + '}';
+        return "Cliente{" + "idCliente=" + idCliente + ", apellido=" + apellido + ", nombre=" + nombre + ", domicilio=" + domicilio + ", telefono=" + telefono + '}';
     }
     
 }
