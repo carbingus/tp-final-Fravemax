@@ -91,4 +91,21 @@ public class ProductoData {
         return productos;
     }
     
+    public Producto buscarProducto(int id) {
+        Producto producto = null;
+        String sql = "SELECT * FROM producto WHERE idProducto=?";
+        try {
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                producto = new Producto(id, rs.getString("nombre"), rs.getDouble("precio"), rs.getInt("stock"));
+            }
+            ps.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error: "+e.getMessage());
+        }
+        return producto;
+    }
+    
 }

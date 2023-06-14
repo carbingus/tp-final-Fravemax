@@ -11,6 +11,7 @@ import Entidades.Compra;
 
 public class CompraData {
     private Connection conexion = null;
+    private ProveedorData proveedorData = new ProveedorData();
 
     public CompraData() {
         conexion = Conexion.getConexion();
@@ -32,6 +33,23 @@ public class CompraData {
         } catch (SQLException e){
             JOptionPane.showMessageDialog(null, "Error: "+e.getLocalizedMessage());
         }
+    }
+    
+    public Compra buscarCompra(int id) {
+        Compra compra = null;
+        String sql = "SELECT * FROM compra WHERE idCompra=?";
+        try {
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                compra = new Compra(id, proveedorData.buscarProveedor(rs.getInt("idProvedor")), rs.getDate("fecha").toLocalDate());
+            }
+            ps.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error: "+e.getMessage());
+        }
+        return compra;
     }
     
 }

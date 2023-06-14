@@ -89,6 +89,21 @@ public class ClienteData {
         return clientes;
     }
     
+    public Cliente buscarCliente(int id) {
+        Cliente cliente = null;
+        String sql = "SELECT * FROM cliente WHERE idCliente=?";
+        try {
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                cliente = new Cliente(id, rs.getString("apellido"), rs.getString("nombre"), rs.getString("domicilio"), rs.getString("telefono"));
+            }
+            ps.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error: "+e.getMessage());
+        }
+        return cliente;
+    }
+    
 }
-
-
