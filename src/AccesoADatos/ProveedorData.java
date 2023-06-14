@@ -17,7 +17,7 @@ public class ProveedorData {
         conexion = Conexion.getConexion();
     }
     
-    public void guardarCliente(Proveedor proveedor) {
+    public void guardarProveedor(Proveedor proveedor) {
         String sql = "INSERT INTO proveedor(razonSocial,domicilio,telefono) VALUES (?,?,?);";
         try {
             PreparedStatement ps = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
