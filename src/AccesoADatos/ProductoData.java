@@ -18,12 +18,13 @@ public class ProductoData {
     }
     
     public void guardarProducto(Producto producto){
-        String sql = "INSERT INTO producto(nombre,precio,stock) VALUES (?,?,?);";
+        String sql = "INSERT INTO producto(nombre,precio,stock,estado) VALUES (?,?,?,?);";
         try {
             PreparedStatement ps = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, producto.getNombre());
             ps.setDouble(2, producto.getPrecio());
             ps.setInt(3, producto.getStock());
+            ps.setBoolean(4, producto.getEstado());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
@@ -37,7 +38,7 @@ public class ProductoData {
     }
     
     public void eliminarProducto(int id) {
-        String sql = "DELETE FROM producto WHERE idProducto=?;";
+        String sql = "UPDATE producto SET estado=false WHERE idProducto=?;";
         try {
             PreparedStatement ps = conexion.prepareStatement(sql);
             ps.setInt(1, id);
@@ -51,7 +52,7 @@ public class ProductoData {
     
     public List<Producto> listarProductosConStock() {
         List<Producto> productos = new ArrayList();
-        String sql = "SELECT * FROM producto WHERE stock>0";
+        String sql = "SELECT * FROM producto WHERE stock>0 AND estado=true";
         try{
             PreparedStatement ps = conexion.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
@@ -61,6 +62,7 @@ public class ProductoData {
                 producto.setNombre(rs.getString("nombre"));
                 producto.setPrecio(rs.getDouble("precio"));
                 producto.setStock(rs.getInt("stock"));
+                producto.setEstado(rs.getBoolean("estado"));
                 productos.add(producto);
             }
             ps.close();
@@ -82,6 +84,7 @@ public class ProductoData {
                 producto.setNombre(rs.getString("nombre"));
                 producto.setPrecio(rs.getDouble("precio"));
                 producto.setStock(rs.getInt("stock"));
+                producto.setEstado(rs.getBoolean("estado"));
                 productos.add(producto);
             }
             ps.close();
@@ -99,7 +102,7 @@ public class ProductoData {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                producto = new Producto(id, rs.getString("nombre"), rs.getDouble("precio"), rs.getInt("stock"));
+                producto = new Producto(id, rs.getString("nombre"), rs.getDouble("precio"), rs.getInt("stock"), rs.getBoolean("estado"));
             }
             ps.close();
         } catch (SQLException e) {

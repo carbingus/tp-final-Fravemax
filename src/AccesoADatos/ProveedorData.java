@@ -18,12 +18,13 @@ public class ProveedorData {
     }
     
     public void guardarProveedor(Proveedor proveedor) {
-        String sql = "INSERT INTO proveedor(razonSocial,domicilio,telefono) VALUES (?,?,?);";
+        String sql = "INSERT INTO proveedor(razonSocial,domicilio,telefono,estado) VALUES (?,?,?,?);";
         try {
             PreparedStatement ps = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, proveedor.getRazonSocial());
             ps.setString(2, proveedor.getDomicilio());
             ps.setString(3, proveedor.getTelefono());
+            ps.setBoolean(4, proveedor.getEstado());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
@@ -37,13 +38,14 @@ public class ProveedorData {
     }
     
     public void modificarProveedor(Proveedor proveedor) {
-        String sql = "UPDATE proveedor SET razonSocial=?,domicilio=?,telefono=? WHERE idProvedor=?;";
+        String sql = "UPDATE proveedor SET razonSocial=?,domicilio=?,telefono=?,estado=? WHERE idProvedor=?;";
         try {
             PreparedStatement ps = conexion.prepareStatement(sql);
             ps.setString(1, proveedor.getRazonSocial());
             ps.setString(2, proveedor.getDomicilio());
             ps.setString(3, proveedor.getTelefono());
-            ps.setInt(4, proveedor.getIdProveedor());
+            ps.setBoolean(4, proveedor.getEstado());
+            ps.setInt(5, proveedor.getIdProveedor());
             ps.executeUpdate();
             System.out.println("Proveedor modificado!");
             ps.close();
@@ -53,7 +55,7 @@ public class ProveedorData {
     }
     
     public void eliminarProveedor(int id) {
-        String sql = "DELETE FROM proveedor WHERE idProvedor=?;";
+        String sql = "UPDATE proveedor SET estado=false WHERE idProvedor=?;";
         try {
             PreparedStatement ps = conexion.prepareStatement(sql);
             ps.setInt(1, id);
@@ -77,6 +79,7 @@ public class ProveedorData {
                 proveedor.setRazonSocial(rs.getString("razonSocial"));
                 proveedor.setDomicilio(rs.getString("domicilio"));
                 proveedor.setTelefono(rs.getString("telefono"));
+                proveedor.setEstado(rs.getBoolean("estado"));
                 proveedores.add(proveedor);
             }
             ps.close();
@@ -94,7 +97,7 @@ public class ProveedorData {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                proveedor = new Proveedor(id, rs.getString("razonSocial"), rs.getString("domicilio"), rs.getString("telefono"));
+                proveedor = new Proveedor(id, rs.getString("razonSocial"), rs.getString("domicilio"), rs.getString("telefono"), rs.getBoolean("estado"));
             }
             ps.close();
         } catch (SQLException e) {

@@ -18,13 +18,15 @@ public class ClienteData {
     }
     
     public void guardarCliente(Cliente cliente) {
-        String sql = "INSERT INTO cliente(apellido,nombre,domicilio,telefono) VALUES (?,?,?,?);";
+        String sql = "INSERT INTO cliente(dni,apellido,nombre,domicilio,telefono,estado) VALUES (?,?,?,?,?,?);";
         try {
             PreparedStatement ps = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, cliente.getApellido());
-            ps.setString(2, cliente.getNombre());
-            ps.setString(3, cliente.getDomicilio());
-            ps.setString(4, cliente.getTelefono());
+            ps.setInt(1, cliente.getDni());
+            ps.setString(2, cliente.getApellido());
+            ps.setString(3, cliente.getNombre());
+            ps.setString(4, cliente.getDomicilio());
+            ps.setString(5, cliente.getTelefono());
+            ps.setBoolean(6, cliente.getEstado());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
@@ -38,14 +40,16 @@ public class ClienteData {
     }
     
     public void modificarCliente(Cliente cliente) {
-        String sql = "UPDATE cliente SET apellido=?,nombre=?,domicilio=?,telefono=? WHERE idCliente=?;";
+        String sql = "UPDATE cliente SET dni=?,apellido=?,nombre=?,domicilio=?,telefono=?,estado=? WHERE idCliente=?;";
         try {
             PreparedStatement ps = conexion.prepareStatement(sql);
-            ps.setString(1, cliente.getApellido());
-            ps.setString(2, cliente.getNombre());
-            ps.setString(3, cliente.getDomicilio());
-            ps.setString(4, cliente.getTelefono());
-            ps.setInt(5, cliente.getIdCliente());
+            ps.setInt(1, cliente.getDni());
+            ps.setString(2, cliente.getApellido());
+            ps.setString(3, cliente.getNombre());
+            ps.setString(4, cliente.getDomicilio());
+            ps.setString(5, cliente.getTelefono());
+            ps.setBoolean(6, cliente.getEstado());
+            ps.setInt(7, cliente.getIdCliente());
             ps.executeUpdate();
             System.out.println("Cliente modificado!");
             ps.close();
@@ -55,7 +59,7 @@ public class ClienteData {
     }
     
     public void eliminarCliente(int id) {
-        String sql = "DELETE FROM cliente WHERE idCliente=?;";
+        String sql = "UPDATE cliente SET estado=false WHERE idCliente=?;";
         try {
             PreparedStatement ps = conexion.prepareStatement(sql);
             ps.setInt(1, id);
@@ -76,15 +80,17 @@ public class ClienteData {
             while (rs.next()) {
                 Cliente cliente = new Cliente();
                 cliente.setIdCliente(rs.getInt("idCliente"));
+                cliente.setDni(rs.getInt("dni"));
                 cliente.setApellido(rs.getString("apellido"));
                 cliente.setNombre(rs.getString("nombre"));
                 cliente.setDomicilio(rs.getString("domicilio"));
                 cliente.setTelefono(rs.getString("telefono"));
+                cliente.setEstado(rs.getBoolean("estado"));
                 clientes.add(cliente);
             }
             ps.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null,"Error: " + e.getLocalizedMessage());
+            JOptionPane.showMessageDialog(null,"Error: "+e.getLocalizedMessage());
         }
         return clientes;
     }
@@ -97,7 +103,7 @@ public class ClienteData {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                cliente = new Cliente(id, rs.getString("apellido"), rs.getString("nombre"), rs.getString("domicilio"), rs.getString("telefono"));
+                cliente = new Cliente(id, rs.getInt("dni"), rs.getString("apellido"), rs.getString("nombre"), rs.getString("domicilio"), rs.getString("telefono"), rs.getBoolean("estado"));
             }
             ps.close();
         } catch (SQLException e) {
