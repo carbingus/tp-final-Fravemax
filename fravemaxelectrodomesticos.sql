@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-06-2023 a las 02:37:18
+-- Tiempo de generación: 14-06-2023 a las 22:53:25
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 8.2.0
 
@@ -29,10 +29,12 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `cliente` (
   `idCliente` int(11) NOT NULL,
+  `dni` int(9) NOT NULL,
   `apellido` varchar(30) NOT NULL,
   `nombre` varchar(30) NOT NULL,
   `domicilio` varchar(50) NOT NULL,
-  `telefono` varchar(15) NOT NULL
+  `telefono` varchar(15) NOT NULL,
+  `estado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -85,7 +87,8 @@ CREATE TABLE `producto` (
   `idProducto` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL,
   `precio` double DEFAULT NULL,
-  `stock` int(11) NOT NULL
+  `stock` int(11) NOT NULL,
+  `estado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -98,7 +101,8 @@ CREATE TABLE `proveedor` (
   `idProvedor` int(11) NOT NULL,
   `razonSocial` varchar(30) NOT NULL,
   `domicilio` varchar(50) NOT NULL,
-  `telefono` varchar(15) NOT NULL
+  `telefono` varchar(15) NOT NULL,
+  `estado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -121,7 +125,8 @@ CREATE TABLE `venta` (
 -- Indices de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  ADD PRIMARY KEY (`idCliente`);
+  ADD PRIMARY KEY (`idCliente`),
+  ADD UNIQUE KEY `dni` (`dni`);
 
 --
 -- Indices de la tabla `compra`
@@ -173,7 +178,7 @@ ALTER TABLE `venta`
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `compra`
@@ -197,7 +202,7 @@ ALTER TABLE `detalleventa`
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `idProducto` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idProducto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `proveedor`
