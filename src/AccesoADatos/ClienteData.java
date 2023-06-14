@@ -73,7 +73,7 @@ public class ClienteData {
         try{
             PreparedStatement ps = conexion.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            while (rs.next()){
+            while (rs.next()) {
                 Cliente cliente = new Cliente();
                 cliente.setIdCliente(rs.getInt("idCliente"));
                 cliente.setApellido(rs.getString("apellido"));
@@ -83,9 +83,8 @@ public class ClienteData {
                 clientes.add(cliente);
             }
             ps.close();
-        } catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"Error: " + ex.getLocalizedMessage());
-            
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,"Error: " + e.getLocalizedMessage());
         }
         return clientes;
     }
