@@ -3,7 +3,7 @@ package Entidades;
 import java.time.LocalDate;
 
 public class Compra {
-    private int id_compra;
+    private int idCompra;
     private Proveedor proveedor;
     private LocalDate fecha;
 
@@ -15,18 +15,18 @@ public class Compra {
         this.fecha = fecha;
     }
 
-    public Compra(int id_compra, Proveedor proveedor, LocalDate fecha) {
-        this.id_compra = id_compra;
+    public Compra(int idCompra, Proveedor proveedor, LocalDate fecha) {
+        this.idCompra = idCompra;
         this.proveedor = proveedor;
         this.fecha = fecha;
     }
 
-    public int getId_compra() {
-        return id_compra;
+    public int getIdCompra() {
+        return idCompra;
     }
 
-    public void setId_compra(int id_compra) {
-        this.id_compra = id_compra;
+    public void setIdCompra(int idCompra) {
+        this.idCompra = idCompra;
     }
 
     public Proveedor getProveedor() {
@@ -47,7 +47,7 @@ public class Compra {
 
     @Override
     public String toString() {
-        return "Compra{" + "id_compra=" + id_compra + ", proveedor=" + proveedor + ", fecha=" + fecha + '}';
+        return "Compra{" + "idCompra=" + idCompra + ", proveedor=" + proveedor + ", fecha=" + fecha + '}';
     }
     
 }

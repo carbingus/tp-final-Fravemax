@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package AccesoADatos;
 
 import java.sql.Connection;
@@ -10,41 +6,32 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.JOptionPane;
-import Entidades.*;
-import AccesoADatos.*;
-
+import Entidades.Compra;
 
 public class CompraData {
-    
-    private Connection con = null;
-
+    private Connection conexion = null;
 
     public CompraData() {
-        con = Conexion.getConexion();
+        conexion = Conexion.getConexion();
     }
     
-    public void realizarPedido(DetalleCompra comp){
-        String sql = "INSERT INTO detallecompra (cantidad, precioCosto, idCompra, idProducto) VALUES (?, ?, ?, ?)";
+    public void guardarCompra(Compra compra) {
+        String sql = "INSERT INTO compra(idProvedor,fecha) VALUES (?,?);";
         try{
-            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, comp.getCantidad());
-            ps.setDouble(2, comp.getPrecioCosto());
-            ps.setInt(3, comp.getCompra().getId_compra());
-            ps.setInt(4, comp.getProducto().getId_producto());
-            
+            PreparedStatement ps = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, compra.getProveedor().getIdProveedor());
+            ps.setDate(2, Date.valueOf(compra.getFecha()));
             ps.executeUpdate();
-            ResultSet rs = ps.executeQuery();
-            
+            ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()){
-                comp.setId_detalle(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "El pedido se ha guardado exitosamente.");
-                
+                compra.setIdCompra(rs.getInt(1));
             }
-        } catch (SQLException ex){
-            JOptionPane.showMessageDialog(null, "Error al acceder a tabla DetalleCompra. Codigo: " + ex.getLocalizedMessage());
+            System.out.println("Compra guardada!");
+            ps.close();
+        } catch (SQLException e){
+            JOptionPane.showMessageDialog(null, "Error: "+e.getLocalizedMessage());
         }
     }
+    
 }
