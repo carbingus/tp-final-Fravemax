@@ -6,10 +6,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 public class DetalleCompraData {
     private Connection conexion = null;
+    private ProductoData productoData = new ProductoData();
+    private CompraData compraData = new CompraData();    
 
     public DetalleCompraData() {
         conexion = Conexion.getConexion();
@@ -34,4 +38,27 @@ public class DetalleCompraData {
             JOptionPane.showMessageDialog(null, "Error: "+e.getLocalizedMessage());
         }
     }
+    
+    public List<DetalleCompra> listarDetalleCompras() {
+        List<DetalleCompra> lista = new ArrayList();
+        String sql = "SELECT * FROM detallecompra";
+        try {
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                DetalleCompra dc = new DetalleCompra();
+                dc.setIdDetalle(rs.getInt("idDetalle"));
+                dc.setCantidad(rs.getInt("cantidad"));
+                dc.setPrecioCosto(rs.getDouble("precioCosto"));
+                dc.setCompra(compraData.buscarCompra(rs.getInt("idCompra")));
+                dc.setProducto(productoData.buscarProducto(rs.getInt("idProducto")));
+                lista.add(dc);
+            }
+            ps.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error: "+e.getLocalizedMessage());
+        }
+        return lista;
+    }
+    
 }

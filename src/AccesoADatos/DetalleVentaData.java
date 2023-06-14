@@ -41,7 +41,7 @@ public class DetalleVentaData {
     
     public List<DetalleVenta> listarDetalleVentas() {
         List<DetalleVenta> lista = new ArrayList();
-        String sql = "SELECT * FROM DetalleVenta";
+        String sql = "SELECT * FROM detalleVenta";
         try {
             PreparedStatement ps = conexion.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
