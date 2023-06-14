@@ -13,7 +13,6 @@ import Entidades.Venta;
 
 public class VentaData {
     private Connection conexion = null;
-    private ProductoData productoData = new ProductoData();
     private ClienteData clienteData = new ClienteData();
 
     public VentaData() {
@@ -54,34 +53,5 @@ public class VentaData {
         }
         return venta;
     }
-
-//    public List<Venta> obtenerVentas() {
-//        List<Venta> ventas = new ArrayList();
-//        try {
-//            String sql = "SELECT * FROM detalleventa;";
-//            PreparedStatement ps = conexion.prepareStatement(sql);
-//            ResultSet rs = ps.executeQuery();
-//            Venta vend;
-//
-//            while (rs.next()) {
-//                vend = new Venta();
-//                vend.setId_venta(rs.getInt("idDetalleVenta"));
-//
-//                Producto p = productoData.buscarProducto(rs.getInt("idProducto"));
-//                vend.setProducto(p);
-//
-//                Cliente c = clienteData.buscarCliente(rs.getInt("idCliente"));
-//                vend.setCliente(c);
-//
-//                vend.setFecha(rs.getDate("fecha").toLocalDate());
-//
-//            }
-//            ps.close();
-//        } catch (SQLException ex) {
-//            JOptionPane.showMessageDialog(null, "Error al acceder a tabla DetalleVenta. Codigo: " + ex.getLocalizedMessage());
-//
-//        }
-//        return ventas;
-//    }
 
 }
