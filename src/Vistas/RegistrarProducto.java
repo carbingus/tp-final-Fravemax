@@ -9,12 +9,12 @@ package Vistas;
  *
  * @author CDR
  */
-public class RegistrarProductos extends javax.swing.JInternalFrame {
+public class RegistrarProducto extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form RegistrarProductos
      */
-    public RegistrarProductos() {
+    public RegistrarProducto() {
         initComponents();
     }
 
