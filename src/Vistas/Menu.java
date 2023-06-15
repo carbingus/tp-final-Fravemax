@@ -15,8 +15,13 @@ public class Menu extends javax.swing.JFrame {
 
         escritorio = new javax.swing.JDesktopPane();
         barraMenu = new javax.swing.JMenuBar();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        menuClientes = new javax.swing.JMenu();
+        vistaAgregarCliente = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
+        jMenu4 = new javax.swing.JMenu();
+        jMenu5 = new javax.swing.JMenu();
+        jMenu6 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -24,24 +29,39 @@ public class Menu extends javax.swing.JFrame {
         escritorio.setLayout(escritorioLayout);
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 571, Short.MAX_VALUE)
+            .addGap(0, 670, Short.MAX_VALUE)
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 383, Short.MAX_VALUE)
+            .addGap(0, 462, Short.MAX_VALUE)
         );
 
-        jMenu2.setText("Edit");
+        menuClientes.setText("Clientes");
 
-        jMenuItem1.setText("jMenuItem1");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        vistaAgregarCliente.setText("Agregar Cliente");
+        vistaAgregarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                vistaAgregarClienteActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem1);
+        menuClientes.add(vistaAgregarCliente);
 
-        barraMenu.add(jMenu2);
+        barraMenu.add(menuClientes);
+
+        jMenu1.setText("Productos");
+        barraMenu.add(jMenu1);
+
+        jMenu3.setText("Proveedores");
+        barraMenu.add(jMenu3);
+
+        jMenu4.setText("Ventas");
+        barraMenu.add(jMenu4);
+
+        jMenu5.setText("Compras");
+        barraMenu.add(jMenu5);
+
+        jMenu6.setText("Inventario");
+        barraMenu.add(jMenu6);
 
         setJMenuBar(barraMenu);
 
@@ -59,12 +79,12 @@ public class Menu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void vistaAgregarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vistaAgregarClienteActionPerformed
         escritorio.removeAll();
         escritorio.repaint();
-        VistaPrueba vp = new VistaPrueba();
-        centrarVentana(vp);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+        AgregarCliente ac = new AgregarCliente();
+        centrarVentana(ac);
+    }//GEN-LAST:event_vistaAgregarClienteActionPerformed
 
     public void centrarVentana(JInternalFrame ventana) {
         int x = escritorio.getWidth()/2 - ventana.getWidth()/2;
@@ -113,7 +133,12 @@ public class Menu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar barraMenu;
     private javax.swing.JDesktopPane escritorio;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu menuClientes;
+    private javax.swing.JMenuItem vistaAgregarCliente;
     // End of variables declaration//GEN-END:variables
 }
