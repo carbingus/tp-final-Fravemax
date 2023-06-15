@@ -17,6 +17,7 @@ public class Menu extends javax.swing.JFrame {
         barraMenu = new javax.swing.JMenuBar();
         menuClientes = new javax.swing.JMenu();
         vistaAgregarCliente = new javax.swing.JMenuItem();
+        vistaModificarCliente = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
@@ -45,6 +46,14 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         menuClientes.add(vistaAgregarCliente);
+
+        vistaModificarCliente.setText("Modificar Cliente");
+        vistaModificarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vistaModificarClienteActionPerformed(evt);
+            }
+        });
+        menuClientes.add(vistaModificarCliente);
 
         barraMenu.add(menuClientes);
 
@@ -85,6 +94,13 @@ public class Menu extends javax.swing.JFrame {
         AgregarCliente ac = new AgregarCliente();
         centrarVentana(ac);
     }//GEN-LAST:event_vistaAgregarClienteActionPerformed
+
+    private void vistaModificarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vistaModificarClienteActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        ModificarCliente md = new ModificarCliente();
+        centrarVentana(md);
+    }//GEN-LAST:event_vistaModificarClienteActionPerformed
 
     public void centrarVentana(JInternalFrame ventana) {
         int x = escritorio.getWidth()/2 - ventana.getWidth()/2;
@@ -140,5 +156,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu menuClientes;
     private javax.swing.JMenuItem vistaAgregarCliente;
+    private javax.swing.JMenuItem vistaModificarCliente;
     // End of variables declaration//GEN-END:variables
 }

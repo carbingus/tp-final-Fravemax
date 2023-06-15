@@ -73,7 +73,7 @@ public class ClienteData {
     
     public List<Cliente> listarClientes() {
         List<Cliente> clientes = new ArrayList();
-        String sql = "SELECT * FROM cliente";
+        String sql = "SELECT * FROM cliente WHERE estado=true";
         try{
             PreparedStatement ps = conexion.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
