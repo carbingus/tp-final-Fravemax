@@ -20,8 +20,10 @@ public class Menu extends javax.swing.JFrame {
         vistaModificarCliente = new javax.swing.JMenuItem();
         vistaEliminarCliente = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
+        vistaModificarProveedor = new javax.swing.JMenu();
         vistaAgregarProveedor = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        vistaEliminarProveedor = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
         jMenu6 = new javax.swing.JMenu();
@@ -70,7 +72,7 @@ public class Menu extends javax.swing.JFrame {
         jMenu1.setText("Productos");
         barraMenu.add(jMenu1);
 
-        jMenu3.setText("Proveedores");
+        vistaModificarProveedor.setText("Proveedores");
 
         vistaAgregarProveedor.setText("Agregar Proveedor");
         vistaAgregarProveedor.addActionListener(new java.awt.event.ActionListener() {
@@ -78,9 +80,25 @@ public class Menu extends javax.swing.JFrame {
                 vistaAgregarProveedorActionPerformed(evt);
             }
         });
-        jMenu3.add(vistaAgregarProveedor);
+        vistaModificarProveedor.add(vistaAgregarProveedor);
 
-        barraMenu.add(jMenu3);
+        jMenuItem1.setText("Modificar Proveedor");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        vistaModificarProveedor.add(jMenuItem1);
+
+        vistaEliminarProveedor.setText("Eliminar Proveedor");
+        vistaEliminarProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vistaEliminarProveedorActionPerformed(evt);
+            }
+        });
+        vistaModificarProveedor.add(vistaEliminarProveedor);
+
+        barraMenu.add(vistaModificarProveedor);
 
         jMenu4.setText("Ventas");
         barraMenu.add(jMenu4);
@@ -135,6 +153,20 @@ public class Menu extends javax.swing.JFrame {
         centrarVentana(ap);
     }//GEN-LAST:event_vistaAgregarProveedorActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        ModificarProveedor mp = new ModificarProveedor();
+        centrarVentana(mp);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void vistaEliminarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vistaEliminarProveedorActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        EliminarProveedor ep = new EliminarProveedor();
+        centrarVentana(ep);
+    }//GEN-LAST:event_vistaEliminarProveedorActionPerformed
+
     public void centrarVentana(JInternalFrame ventana) {
         int x = escritorio.getWidth()/2 - ventana.getWidth()/2;
         int y = escritorio.getHeight()/2 - ventana.getHeight()/2;
@@ -183,14 +215,16 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuBar barraMenu;
     private javax.swing.JDesktopPane escritorio;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenu menuClientes;
     private javax.swing.JMenuItem vistaAgregarCliente;
     private javax.swing.JMenuItem vistaAgregarProveedor;
     private javax.swing.JMenuItem vistaEliminarCliente;
+    private javax.swing.JMenuItem vistaEliminarProveedor;
     private javax.swing.JMenuItem vistaModificarCliente;
+    private javax.swing.JMenu vistaModificarProveedor;
     // End of variables declaration//GEN-END:variables
 }

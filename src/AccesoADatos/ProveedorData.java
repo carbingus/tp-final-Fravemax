@@ -67,7 +67,7 @@ public class ProveedorData {
         }
     }
     
-    public List<Proveedor> listarProveedores(int id) {
+    public List<Proveedor> listarProveedores() {
         List<Proveedor> proveedores = new ArrayList();
         String sql = "SELECT * FROM proveedor";
         try{
