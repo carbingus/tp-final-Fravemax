@@ -21,6 +21,7 @@ public class Menu extends javax.swing.JFrame {
         vistaEliminarCliente = new javax.swing.JMenuItem();
         menuProductos = new javax.swing.JMenu();
         vistaRegistrarProducto = new javax.swing.JMenuItem();
+        vistaEliminarProducto = new javax.swing.JMenuItem();
         menuProveedor = new javax.swing.JMenu();
         vistaAgregarProveedor = new javax.swing.JMenuItem();
         vistaModificarProveedor = new javax.swing.JMenuItem();
@@ -79,6 +80,14 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         menuProductos.add(vistaRegistrarProducto);
+
+        vistaEliminarProducto.setText("Eliminar Producto");
+        vistaEliminarProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vistaEliminarProductoActionPerformed(evt);
+            }
+        });
+        menuProductos.add(vistaEliminarProducto);
 
         barraMenu.add(menuProductos);
 
@@ -184,6 +193,13 @@ public class Menu extends javax.swing.JFrame {
         centrarVentana(rp);
     }//GEN-LAST:event_vistaRegistrarProductoActionPerformed
 
+    private void vistaEliminarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vistaEliminarProductoActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        EliminarProducto ep = new EliminarProducto();
+        centrarVentana(ep);
+    }//GEN-LAST:event_vistaEliminarProductoActionPerformed
+
     public void centrarVentana(JInternalFrame ventana) {
         int x = escritorio.getWidth()/2 - ventana.getWidth()/2;
         int y = escritorio.getHeight()/2 - ventana.getHeight()/2;
@@ -240,6 +256,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem vistaAgregarCliente;
     private javax.swing.JMenuItem vistaAgregarProveedor;
     private javax.swing.JMenuItem vistaEliminarCliente;
+    private javax.swing.JMenuItem vistaEliminarProducto;
     private javax.swing.JMenuItem vistaEliminarProveedor;
     private javax.swing.JMenuItem vistaModificarCliente;
     private javax.swing.JMenuItem vistaModificarProveedor;
