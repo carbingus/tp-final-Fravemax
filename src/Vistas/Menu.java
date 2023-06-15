@@ -21,6 +21,7 @@ public class Menu extends javax.swing.JFrame {
         vistaEliminarCliente = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
+        vistaAgregarProveedor = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
         jMenu6 = new javax.swing.JMenu();
@@ -70,6 +71,15 @@ public class Menu extends javax.swing.JFrame {
         barraMenu.add(jMenu1);
 
         jMenu3.setText("Proveedores");
+
+        vistaAgregarProveedor.setText("Agregar Proveedor");
+        vistaAgregarProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vistaAgregarProveedorActionPerformed(evt);
+            }
+        });
+        jMenu3.add(vistaAgregarProveedor);
+
         barraMenu.add(jMenu3);
 
         jMenu4.setText("Ventas");
@@ -117,6 +127,13 @@ public class Menu extends javax.swing.JFrame {
         EliminarCliente ec = new EliminarCliente();
         centrarVentana(ec);
     }//GEN-LAST:event_vistaEliminarClienteActionPerformed
+
+    private void vistaAgregarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vistaAgregarProveedorActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        AgregarProveedor ap = new AgregarProveedor();
+        centrarVentana(ap);
+    }//GEN-LAST:event_vistaAgregarProveedorActionPerformed
 
     public void centrarVentana(JInternalFrame ventana) {
         int x = escritorio.getWidth()/2 - ventana.getWidth()/2;
@@ -172,6 +189,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu menuClientes;
     private javax.swing.JMenuItem vistaAgregarCliente;
+    private javax.swing.JMenuItem vistaAgregarProveedor;
     private javax.swing.JMenuItem vistaEliminarCliente;
     private javax.swing.JMenuItem vistaModificarCliente;
     // End of variables declaration//GEN-END:variables
