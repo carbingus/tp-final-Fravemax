@@ -2,6 +2,8 @@ package Vistas;
 
 import AccesoADatos.ClienteData;
 import Entidades.Cliente;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -16,6 +18,13 @@ public class ModificarCliente extends javax.swing.JInternalFrame {
         btnModificar.setEnabled(false);
         
         List<Cliente> listaClientes = cd.listarClientes();
+        
+        Collections.sort(listaClientes, new Comparator<Cliente>() {
+            public int compare(Cliente o1, Cliente o2) {
+                return o1.toString().compareTo(o2.toString());
+            }
+        });
+        
         for (Cliente cliente : listaClientes) {
             cmbCliente.addItem(cliente);
         }
