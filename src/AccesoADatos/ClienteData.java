@@ -31,8 +31,8 @@ public class ClienteData {
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
                 cliente.setIdCliente(rs.getInt(1));
+                System.out.println("Cliente agregado!");
             }
-            System.out.println("Cliente agregado!");
             ps.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error: "+e.getLocalizedMessage());
