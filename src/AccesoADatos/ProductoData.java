@@ -18,13 +18,14 @@ public class ProductoData {
     }
     
     public void guardarProducto(Producto producto){
-        String sql = "INSERT INTO producto(nombre,precio,stock,estado) VALUES (?,?,?,?);";
+        String sql = "INSERT INTO producto(nombre, categoria, precio, stock, estado) VALUES (?, ?, ?, ?, ?);";
         try {
             PreparedStatement ps = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, producto.getNombre());
-            ps.setDouble(2, producto.getPrecio());
-            ps.setInt(3, producto.getStock());
-            ps.setBoolean(4, producto.getEstado());
+            ps.setString(2,producto.getCategoria());
+            ps.setDouble(3, producto.getPrecio());
+            ps.setInt(4, producto.getStock());
+            ps.setBoolean(5, producto.getEstado());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
@@ -38,14 +39,15 @@ public class ProductoData {
     }
     
     public void modificarProducto(Producto producto) {
-        String sql = "UPDATE producto SET nombre=?,precio=?,stock=?,estado=? WHERE idProducto=?;";
+        String sql = "UPDATE producto SET nombre = ?, categoria = ?, precio = ?, stock = ?, estado = ? WHERE idProducto = ?;";
         try {
             PreparedStatement ps = conexion.prepareStatement(sql);
             ps.setString(1, producto.getNombre());
-            ps.setDouble(2, producto.getPrecio());
-            ps.setInt(3, producto.getStock());
-            ps.setBoolean(4, producto.getEstado());
-            ps.setInt(5, producto.getIdProducto());
+            ps.setString(2,producto.getCategoria());
+            ps.setDouble(3, producto.getPrecio());
+            ps.setInt(4, producto.getStock());
+            ps.setBoolean(5, producto.getEstado());
+            ps.setInt(6, producto.getIdProducto());
             ps.executeUpdate();
             System.out.println("Producto modificado!");
             ps.close();
@@ -77,6 +79,7 @@ public class ProductoData {
                 Producto producto = new Producto();
                 producto.setIdProducto(rs.getInt("idProducto"));
                 producto.setNombre(rs.getString("nombre"));
+                producto.setCategoria(rs.getString("categoria"));
                 producto.setPrecio(rs.getDouble("precio"));
                 producto.setStock(rs.getInt("stock"));
                 producto.setEstado(rs.getBoolean("estado"));
@@ -99,6 +102,7 @@ public class ProductoData {
                 Producto producto = new Producto();
                 producto.setIdProducto(rs.getInt("idProducto"));
                 producto.setNombre(rs.getString("nombre"));
+                producto.setCategoria(rs.getString("categoria"));
                 producto.setPrecio(rs.getDouble("precio"));
                 producto.setStock(rs.getInt("stock"));
                 producto.setEstado(rs.getBoolean("estado"));
