@@ -150,6 +150,34 @@ public class ProductoData {
         
         } return productos;
     }
-    
+        
+        public Producto buscarProductosPorNombre(String nombre){
+        String sql = "SELECT * FROM producto WHERE nombre = ?;";
+        Producto pr = null;
+        
+        try{
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setString(1, nombre);
+            
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs.next()){
+                pr = new Producto();
+                pr.setIdProducto(rs.getInt("idProducto"));
+                pr.setNombre(rs.getString("nombre"));
+//                pr.setCategoria(rs.getString("categoria"));
+                pr.setPrecio(rs.getDouble("precio"));
+                pr.setStock(rs.getInt("stock"));
+                pr.setEstado(rs.getBoolean("estado"));
+            } else {
+                JOptionPane.showMessageDialog(null, "No hay productos en esta categoria.");
+            }
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Productos. Codigo: " +ex.getLocalizedMessage());
+        }
+        
+        return pr;
+    }
     
 }
