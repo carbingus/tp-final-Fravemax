@@ -128,4 +128,28 @@ public class ProductoData {
         return producto;
     }
     
+        public List<Producto> listarProductos(){
+        List<Producto> productos = new ArrayList<>();
+        try{
+            String sql = "SELECT * FROM producto WHERE estado = 1;";
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                Producto producto = new Producto();
+                producto.setIdProducto(rs.getInt("idProducto"));
+                producto.setNombre(rs.getString("nombre"));
+//                producto.setString(rs.getString("categoria"));
+                producto.setPrecio(rs.getDouble("precio"));
+                producto.setStock(rs.getInt("stock"));
+                producto.setEstado(rs.getBoolean("estado"));
+                
+            }
+            ps.close();
+        } catch(SQLException ex){
+            JOptionPane.showConfirmDialog(null, "Error al acceder a tabla Producto. Codigo: " +ex.getLocalizedMessage());
+        
+        } return productos;
+    }
+    
+    
 }
