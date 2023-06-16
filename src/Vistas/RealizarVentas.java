@@ -80,6 +80,7 @@ public class RealizarVentas extends javax.swing.JInternalFrame {
         lblPrecioTotal = new javax.swing.JLabel();
         txtPrecioUnidad = new javax.swing.JLabel();
         txtPrecioTotal = new javax.swing.JLabel();
+        jlblIconito = new javax.swing.JLabel();
 
         lblTitulo.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         lblTitulo.setText("Realizar Venta");
@@ -129,6 +130,8 @@ public class RealizarVentas extends javax.swing.JInternalFrame {
         txtPrecioTotal.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         txtPrecioTotal.setText("-/-");
 
+        jlblIconito.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vistas/imagenes/producto-default-mini.png"))); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -165,13 +168,17 @@ public class RealizarVentas extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblTitulo)
-                .addGap(133, 133, 133))
+                .addGap(18, 18, 18)
+                .addComponent(jlblIconito)
+                .addGap(78, 78, 78))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(lblTitulo)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblTitulo)
+                    .addComponent(jlblIconito))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCliente)
@@ -199,7 +206,7 @@ public class RealizarVentas extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPrecioTotal)
                     .addComponent(txtPrecioTotal))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAceptar)
                     .addComponent(btnSalir))
@@ -263,6 +270,7 @@ public class RealizarVentas extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnSalir;
     private javax.swing.JComboBox<Cliente> cmbCliente;
     private javax.swing.JComboBox<Producto> cmbProducto;
+    private javax.swing.JLabel jlblIconito;
     private javax.swing.JLabel lblCantidad;
     private javax.swing.JLabel lblCliente;
     private javax.swing.JLabel lblFecha;

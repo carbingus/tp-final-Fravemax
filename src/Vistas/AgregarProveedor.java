@@ -26,6 +26,7 @@ public class AgregarProveedor extends javax.swing.JInternalFrame {
         txtTelefono = new javax.swing.JTextField();
         btnAgregar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
+        jlblIconito = new javax.swing.JLabel();
 
         lblTitulo.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         lblTitulo.setText("Agregar Proveedor");
@@ -68,6 +69,8 @@ public class AgregarProveedor extends javax.swing.JInternalFrame {
             }
         });
 
+        jlblIconito.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vistas/imagenes/proveedor-default-mini.png"))); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -77,7 +80,9 @@ public class AgregarProveedor extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(45, 45, 45)
-                        .addComponent(lblTitulo))
+                        .addComponent(lblTitulo)
+                        .addGap(18, 18, 18)
+                        .addComponent(jlblIconito))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblDomicilio)
@@ -93,13 +98,15 @@ public class AgregarProveedor extends javax.swing.JInternalFrame {
                         .addComponent(btnAgregar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnSalir)))
-                .addContainerGap(70, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addComponent(lblTitulo)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTitulo)
+                    .addComponent(jlblIconito))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblRazonSocial)
@@ -116,7 +123,7 @@ public class AgregarProveedor extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAgregar)
                     .addComponent(btnSalir))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
 
         pack();
@@ -174,6 +181,7 @@ public class AgregarProveedor extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnSalir;
+    private javax.swing.JLabel jlblIconito;
     private javax.swing.JLabel lblDomicilio;
     private javax.swing.JLabel lblRazonSocial;
     private javax.swing.JLabel lblTelefono;

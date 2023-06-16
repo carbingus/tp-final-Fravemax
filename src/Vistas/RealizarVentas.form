@@ -59,15 +59,20 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
               <Component id="lblTitulo" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="133" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="jlblIconito" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
-              <Component id="lblTitulo" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="lblTitulo" min="-2" max="-2" attributes="0"/>
+                  <Component id="jlblIconito" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblCliente" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -103,7 +108,7 @@
                   <Component id="lblPrecioTotal" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtPrecioTotal" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="24" max="32767" attributes="0"/>
+              <EmptySpace pref="22" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnAceptar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnSalir" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -215,6 +220,13 @@
           <Font name="Dialog" size="14" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="-/-"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jlblIconito">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/Vistas/imagenes/producto-default-mini.png"/>
+        </Property>
       </Properties>
     </Component>
   </SubComponents>
