@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-06-2023 a las 22:53:25
--- Versión del servidor: 10.4.27-MariaDB
--- Versión de PHP: 8.2.0
+-- Tiempo de generación: 17-06-2023 a las 01:57:41
+-- Versión del servidor: 10.4.28-MariaDB
+-- Versión de PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -29,13 +29,20 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `cliente` (
   `idCliente` int(11) NOT NULL,
-  `dni` int(9) NOT NULL,
+  `dni` int(11) NOT NULL,
   `apellido` varchar(30) NOT NULL,
   `nombre` varchar(30) NOT NULL,
   `domicilio` varchar(50) NOT NULL,
   `telefono` varchar(15) NOT NULL,
   `estado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `cliente`
+--
+
+INSERT INTO `cliente` (`idCliente`, `dni`, `apellido`, `nombre`, `domicilio`, `telefono`, `estado`) VALUES
+(1, 3333333, 'AAAAAA', 'BBB', 'PLATINAS 320', '324124124', 1);
 
 -- --------------------------------------------------------
 
@@ -58,7 +65,7 @@ CREATE TABLE `compra` (
 CREATE TABLE `detallecompra` (
   `idDetalle` int(11) NOT NULL,
   `cantidad` int(11) NOT NULL,
-  `precioCosto` double DEFAULT NULL,
+  `precioCosto` double NOT NULL,
   `idCompra` int(11) NOT NULL,
   `idProducto` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -72,7 +79,7 @@ CREATE TABLE `detallecompra` (
 CREATE TABLE `detalleventa` (
   `idDetalleVenta` int(11) NOT NULL,
   `cantidad` int(11) NOT NULL,
-  `precioVenta` double DEFAULT NULL,
+  `precioVenta` double NOT NULL,
   `idVenta` int(11) NOT NULL,
   `idProducto` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -86,10 +93,20 @@ CREATE TABLE `detalleventa` (
 CREATE TABLE `producto` (
   `idProducto` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL,
-  `precio` double DEFAULT NULL,
+  `categoria` varchar(20) NOT NULL,
+  `precio` double NOT NULL,
   `stock` int(11) NOT NULL,
   `estado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `producto`
+--
+
+INSERT INTO `producto` (`idProducto`, `nombre`, `categoria`, `precio`, `stock`, `estado`) VALUES
+(3, 'MICROONDAS', 'Electrodomestico', 5200, 0, 1),
+(4, 'RINCONERA', 'Muebles', 50000, 0, 1),
+(5, 'JUEGO DE TOALLAS X3', 'HIGIENE', 1400, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -99,7 +116,7 @@ CREATE TABLE `producto` (
 
 CREATE TABLE `proveedor` (
   `idProvedor` int(11) NOT NULL,
-  `razonSocial` varchar(30) NOT NULL,
+  `razonSocial` varchar(50) NOT NULL,
   `domicilio` varchar(50) NOT NULL,
   `telefono` varchar(15) NOT NULL,
   `estado` tinyint(1) NOT NULL
@@ -133,23 +150,23 @@ ALTER TABLE `cliente`
 --
 ALTER TABLE `compra`
   ADD PRIMARY KEY (`idCompra`),
-  ADD UNIQUE KEY `idProvedor` (`idProvedor`);
+  ADD KEY `idProvedor` (`idProvedor`);
 
 --
 -- Indices de la tabla `detallecompra`
 --
 ALTER TABLE `detallecompra`
   ADD PRIMARY KEY (`idDetalle`),
-  ADD UNIQUE KEY `idCompra` (`idCompra`),
-  ADD UNIQUE KEY `idProducto` (`idProducto`);
+  ADD KEY `idCompra` (`idCompra`),
+  ADD KEY `idProducto` (`idProducto`);
 
 --
 -- Indices de la tabla `detalleventa`
 --
 ALTER TABLE `detalleventa`
   ADD PRIMARY KEY (`idDetalleVenta`),
-  ADD UNIQUE KEY `idVenta` (`idVenta`),
-  ADD UNIQUE KEY `idProducto` (`idProducto`);
+  ADD KEY `idVenta` (`idVenta`),
+  ADD KEY `idProducto` (`idProducto`);
 
 --
 -- Indices de la tabla `producto`
@@ -168,7 +185,7 @@ ALTER TABLE `proveedor`
 --
 ALTER TABLE `venta`
   ADD PRIMARY KEY (`idVenta`),
-  ADD UNIQUE KEY `idCliente` (`idCliente`);
+  ADD KEY `idCliente` (`idCliente`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -202,7 +219,7 @@ ALTER TABLE `detalleventa`
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `idProducto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idProducto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `proveedor`
@@ -244,7 +261,7 @@ ALTER TABLE `detalleventa`
 -- Filtros para la tabla `venta`
 --
 ALTER TABLE `venta`
-  ADD CONSTRAINT `venta_ibfk_2` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`idCliente`);
+  ADD CONSTRAINT `venta_ibfk_1` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`idCliente`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
