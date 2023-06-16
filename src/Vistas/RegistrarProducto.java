@@ -35,6 +35,11 @@ public class RegistrarProducto extends javax.swing.JInternalFrame {
 
         lblPrecio.setText("Precio Costo:");
 
+        txtNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombreActionPerformed(evt);
+            }
+        });
         txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtNombreKeyTyped(evt);
@@ -133,7 +138,7 @@ public class RegistrarProducto extends javax.swing.JInternalFrame {
         if (txtNombre.getText().trim().isEmpty() || txtPrecio.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Por favor, rellene todos los campos.");
         } else {
-            producto = new Producto(txtNombre.getText(), jcmbCateg.getSelectedItem().toString(), Double.parseDouble(txtPrecio.getText()), 0, true);
+            producto = new Producto(txtNombre.getText(), jcmbCateg.getSelectedItem().toString().toUpperCase(), Double.parseDouble(txtPrecio.getText()), 0, true);
             pd.guardarProducto(producto);
             JOptionPane.showMessageDialog(this, "Producto agregado con exito!");
             limpiar();
@@ -166,6 +171,10 @@ public class RegistrarProducto extends javax.swing.JInternalFrame {
     private void jcmbCategActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcmbCategActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jcmbCategActionPerformed
+
+    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreActionPerformed
 
     public void limpiar() {
         txtNombre.setText("");
