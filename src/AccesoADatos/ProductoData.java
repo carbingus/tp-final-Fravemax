@@ -37,6 +37,23 @@ public class ProductoData {
         }
     }
     
+    public void modificarProducto(Producto producto) {
+        String sql = "UPDATE producto SET nombre=?,precio=?,stock=?,estado=? WHERE idProducto=?;";
+        try {
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setString(1, producto.getNombre());
+            ps.setDouble(2, producto.getPrecio());
+            ps.setInt(3, producto.getStock());
+            ps.setBoolean(4, producto.getEstado());
+            ps.setInt(5, producto.getIdProducto());
+            ps.executeUpdate();
+            System.out.println("Producto modificado!");
+            ps.close();
+        } catch (SQLException e){
+            JOptionPane.showMessageDialog(null, "Error: "+e.getLocalizedMessage());
+        }      
+    }
+    
     public void eliminarProducto(int id) {
         String sql = "UPDATE producto SET estado=false WHERE idProducto=?;";
         try {

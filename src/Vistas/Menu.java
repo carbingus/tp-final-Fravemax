@@ -26,8 +26,9 @@ public class Menu extends javax.swing.JFrame {
         vistaAgregarProveedor = new javax.swing.JMenuItem();
         vistaModificarProveedor = new javax.swing.JMenuItem();
         vistaEliminarProveedor = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
-        jMenu5 = new javax.swing.JMenu();
+        menuVentas = new javax.swing.JMenu();
+        vistaRealizarVenta = new javax.swing.JMenuItem();
+        menuCompras = new javax.swing.JMenu();
         jMenu6 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -119,11 +120,20 @@ public class Menu extends javax.swing.JFrame {
 
         barraMenu.add(menuProveedor);
 
-        jMenu4.setText("Ventas");
-        barraMenu.add(jMenu4);
+        menuVentas.setText("Ventas");
 
-        jMenu5.setText("Compras");
-        barraMenu.add(jMenu5);
+        vistaRealizarVenta.setText("Realizar Venta");
+        vistaRealizarVenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vistaRealizarVentaActionPerformed(evt);
+            }
+        });
+        menuVentas.add(vistaRealizarVenta);
+
+        barraMenu.add(menuVentas);
+
+        menuCompras.setText("Compras");
+        barraMenu.add(menuCompras);
 
         jMenu6.setText("Inventario");
         barraMenu.add(jMenu6);
@@ -200,6 +210,13 @@ public class Menu extends javax.swing.JFrame {
         centrarVentana(ep);
     }//GEN-LAST:event_vistaEliminarProductoActionPerformed
 
+    private void vistaRealizarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vistaRealizarVentaActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        RealizarVentas rv = new RealizarVentas();
+        centrarVentana(rv);
+    }//GEN-LAST:event_vistaRealizarVentaActionPerformed
+
     public void centrarVentana(JInternalFrame ventana) {
         int x = escritorio.getWidth()/2 - ventana.getWidth()/2;
         int y = escritorio.getHeight()/2 - ventana.getHeight()/2;
@@ -247,12 +264,12 @@ public class Menu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar barraMenu;
     private javax.swing.JDesktopPane escritorio;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu menuClientes;
+    private javax.swing.JMenu menuCompras;
     private javax.swing.JMenu menuProductos;
     private javax.swing.JMenu menuProveedor;
+    private javax.swing.JMenu menuVentas;
     private javax.swing.JMenuItem vistaAgregarCliente;
     private javax.swing.JMenuItem vistaAgregarProveedor;
     private javax.swing.JMenuItem vistaEliminarCliente;
@@ -260,6 +277,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem vistaEliminarProveedor;
     private javax.swing.JMenuItem vistaModificarCliente;
     private javax.swing.JMenuItem vistaModificarProveedor;
+    private javax.swing.JMenuItem vistaRealizarVenta;
     private javax.swing.JMenuItem vistaRegistrarProducto;
     // End of variables declaration//GEN-END:variables
 }
