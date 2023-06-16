@@ -69,7 +69,7 @@ public class ProveedorData {
     
     public List<Proveedor> listarProveedores() {
         List<Proveedor> proveedores = new ArrayList();
-        String sql = "SELECT * FROM proveedor";
+        String sql = "SELECT * FROM proveedor WHERE estado=true";
         try{
             PreparedStatement ps = conexion.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();

@@ -29,6 +29,7 @@ public class Menu extends javax.swing.JFrame {
         menuVentas = new javax.swing.JMenu();
         vistaRealizarVenta = new javax.swing.JMenuItem();
         menuCompras = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -133,6 +134,15 @@ public class Menu extends javax.swing.JFrame {
         barraMenu.add(menuVentas);
 
         menuCompras.setText("Compras");
+
+        jMenuItem1.setText("Realizar Compra");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        menuCompras.add(jMenuItem1);
+
         barraMenu.add(menuCompras);
 
         jMenu6.setText("Inventario");
@@ -217,6 +227,13 @@ public class Menu extends javax.swing.JFrame {
         centrarVentana(rv);
     }//GEN-LAST:event_vistaRealizarVentaActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        RealizarCompras rc = new RealizarCompras();
+        centrarVentana(rc);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     public void centrarVentana(JInternalFrame ventana) {
         int x = escritorio.getWidth()/2 - ventana.getWidth()/2;
         int y = escritorio.getHeight()/2 - ventana.getHeight()/2;
@@ -265,6 +282,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuBar barraMenu;
     private javax.swing.JDesktopPane escritorio;
     private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenu menuClientes;
     private javax.swing.JMenu menuCompras;
     private javax.swing.JMenu menuProductos;
