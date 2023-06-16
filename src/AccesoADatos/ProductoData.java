@@ -119,7 +119,7 @@ public class ProductoData {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                producto = new Producto(id, rs.getString("nombre"), rs.getDouble("precio"), rs.getInt("stock"), rs.getBoolean("estado"));
+                producto = new Producto(rs.getString("nombre"), rs.getString("categoria"), rs.getDouble("precio"), rs.getInt("stock"), rs.getBoolean("estado"));
             }
             ps.close();
         } catch (SQLException e) {
@@ -138,7 +138,7 @@ public class ProductoData {
                 Producto producto = new Producto();
                 producto.setIdProducto(rs.getInt("idProducto"));
                 producto.setNombre(rs.getString("nombre"));
-//                producto.setString(rs.getString("categoria"));
+                producto.setCategoria(rs.getString("categoria"));
                 producto.setPrecio(rs.getDouble("precio"));
                 producto.setStock(rs.getInt("stock"));
                 producto.setEstado(rs.getBoolean("estado"));
@@ -165,7 +165,7 @@ public class ProductoData {
                 pr = new Producto();
                 pr.setIdProducto(rs.getInt("idProducto"));
                 pr.setNombre(rs.getString("nombre"));
-//                pr.setCategoria(rs.getString("categoria"));
+                pr.setCategoria(rs.getString("categoria"));
                 pr.setPrecio(rs.getDouble("precio"));
                 pr.setStock(rs.getInt("stock"));
                 pr.setEstado(rs.getBoolean("estado"));
