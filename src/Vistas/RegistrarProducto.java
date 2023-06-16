@@ -24,6 +24,9 @@ public class RegistrarProducto extends javax.swing.JInternalFrame {
         txtPrecio = new javax.swing.JTextField();
         btnAgregar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
+        jlblCateg = new javax.swing.JLabel();
+        jcmbCateg = new javax.swing.JComboBox<>();
+        jlblIconito = new javax.swing.JLabel();
 
         lblTitulo.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         lblTitulo.setText("Registrar Producto");
@@ -58,6 +61,17 @@ public class RegistrarProducto extends javax.swing.JInternalFrame {
             }
         });
 
+        jlblCateg.setText("Categoria:");
+
+        jcmbCateg.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Electrodomestico", "Muebles", "Higiene", "Miscelaneo" }));
+        jcmbCateg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcmbCategActionPerformed(evt);
+            }
+        });
+
+        jlblIconito.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vistas/imagenes/producto-default-mini.png"))); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -65,42 +79,51 @@ public class RegistrarProducto extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(103, 103, 103)
-                        .addComponent(lblTitulo))
+                        .addGap(115, 115, 115)
+                        .addComponent(lblTitulo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jlblIconito))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
+                        .addGap(72, 72, 72)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblPrecio)
-                            .addComponent(lblNombre))
+                            .addComponent(lblNombre)
+                            .addComponent(jlblCateg)
+                            .addComponent(btnAgregar))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtNombre)
-                            .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(105, 105, 105)
-                        .addComponent(btnAgregar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnSalir)))
-                .addContainerGap(60, Short.MAX_VALUE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(btnSalir)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtNombre)
+                                    .addComponent(txtPrecio, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)))
+                            .addComponent(jcmbCateg, 0, 170, Short.MAX_VALUE))))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(lblTitulo)
-                .addGap(18, 18, 18)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblTitulo)
+                    .addComponent(jlblIconito))
+                .addGap(18, 30, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNombre)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlblCateg)
+                    .addComponent(jcmbCateg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblPrecio)
                     .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAgregar)
                     .addComponent(btnSalir))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
 
         pack();
@@ -110,7 +133,7 @@ public class RegistrarProducto extends javax.swing.JInternalFrame {
         if (txtNombre.getText().trim().isEmpty() || txtPrecio.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Por favor, rellene todos los campos.");
         } else {
-            producto = new Producto(txtNombre.getText(), Double.parseDouble(txtPrecio.getText()), 0, true);
+            producto = new Producto(txtNombre.getText(), jcmbCateg.getSelectedItem().toString(), Double.parseDouble(txtPrecio.getText()), 0, true);
             pd.guardarProducto(producto);
             JOptionPane.showMessageDialog(this, "Producto agregado con exito!");
             limpiar();
@@ -140,6 +163,10 @@ public class RegistrarProducto extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_txtPrecioKeyTyped
 
+    private void jcmbCategActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcmbCategActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcmbCategActionPerformed
+
     public void limpiar() {
         txtNombre.setText("");
         txtPrecio.setText("");
@@ -148,6 +175,9 @@ public class RegistrarProducto extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnSalir;
+    private javax.swing.JComboBox<String> jcmbCateg;
+    private javax.swing.JLabel jlblCateg;
+    private javax.swing.JLabel jlblIconito;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblPrecio;
     private javax.swing.JLabel lblTitulo;
