@@ -5,17 +5,73 @@
  */
 package Vistas;
 
+import AccesoADatos.ProductoData;
+import Entidades.Producto;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
- * @author CDR
+ * @author extha
  */
+
 public class Inventario extends javax.swing.JInternalFrame {
 
+      private DefaultTableModel tablin;
+    private ProductoData prodData;
+    private ArrayList<Producto> productos;
     /**
      * Creates new form Inventario
      */
     public Inventario() {
         initComponents();
+        setTitle("Lista de productos");
+        setResizable(false);
+        tablin = new DefaultTableModel();
+        prodData = new ProductoData();
+        generarTabla();
+    }
+    
+    private void generarTabla(){
+        ArrayList<Object> columnas = new ArrayList<>();
+        columnas.add("ID");
+        columnas.add("Nombre");
+        columnas.add("Categoria");
+        columnas.add("Precio");
+        columnas.add("Stock");
+        columnas.add("Estado");
+
+        for (Object columna : columnas) {
+            tablin.addColumn(columna);
+        }
+        tablaProductos.setModel(tablin); 
+
+        limpiarTablin();
+        accederTablin();
+    }
+    
+    private void limpiarTablin(){
+        int fila = tablin.getRowCount() - 1;
+        
+        for (int i = fila; i >= 0; i--){
+            tablin.removeRow(i);
+        }
+    }
+    
+    private void accederTablin(){
+         productos = (ArrayList<Producto>) prodData.listarProductos();
+
+        for (Producto prod : productos) {
+
+            String estado;
+            if (prod.getEstado()) {
+                estado = "Disponible";
+            } else {
+                estado = "No disponible";
+            }
+
+            tablin.addRow(new Object[]{prod.getIdProducto(), prod.getNombre(), prod.getCategoria(), prod.getPrecio(), prod.getStock(), estado});
+        }
     }
 
     /**
@@ -27,21 +83,156 @@ public class Inventario extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        panel = new javax.swing.JPanel();
+        jlblTitulo = new javax.swing.JLabel();
+        jlblNombreProd = new javax.swing.JLabel();
+        jtxtBuscar = new javax.swing.JTextField();
+        jbtnBuscar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaProductos = new javax.swing.JTable();
+        jlblInfo = new javax.swing.JLabel();
+        jbtSalir = new javax.swing.JButton();
+
+        jlblTitulo.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
+        jlblTitulo.setText("Lista de productos");
+
+        jlblNombreProd.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jlblNombreProd.setText("Nombre de Producto:");
+
+        jtxtBuscar.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
+        jtxtBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtxtBuscarActionPerformed(evt);
+            }
+        });
+
+        jbtnBuscar.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
+        jbtnBuscar.setText("Buscar");
+        jbtnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnBuscarActionPerformed(evt);
+            }
+        });
+
+        tablaProductos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tablaProductos);
+
+        jlblInfo.setFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
+        jlblInfo.setForeground(new java.awt.Color(0, 0, 0));
+        jlblInfo.setText("*Para editar detalles, haga doble click en el campo que quiera modificar");
+
+        jbtSalir.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jbtSalir.setText("Salir");
+        jbtSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtSalirActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
+        panel.setLayout(panelLayout);
+        panelLayout.setHorizontalGroup(
+            panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1)
+            .addGroup(panelLayout.createSequentialGroup()
+                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jlblInfo))
+                    .addGroup(panelLayout.createSequentialGroup()
+                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelLayout.createSequentialGroup()
+                                .addGap(85, 85, 85)
+                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jlblTitulo)
+                                    .addGroup(panelLayout.createSequentialGroup()
+                                        .addComponent(jlblNombreProd)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jtxtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(18, 18, 18)
+                                .addComponent(jbtnBuscar))
+                            .addGroup(panelLayout.createSequentialGroup()
+                                .addGap(269, 269, 269)
+                                .addComponent(jbtSalir)))
+                        .addGap(0, 170, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        panelLayout.setVerticalGroup(
+            panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelLayout.createSequentialGroup()
+                .addComponent(jlblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtxtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbtnBuscar)
+                    .addComponent(jlblNombreProd, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(13, 13, 13)
+                .addComponent(jlblInfo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addComponent(jbtSalir)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jtxtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtBuscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtxtBuscarActionPerformed
+
+    private void jbtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnBuscarActionPerformed
+
+        limpiarTablin();
+        String nombre = jtxtBuscar.getText();
+
+        Producto prod = prodData.buscarProductosPorNombre(nombre);
+
+        tablin.addRow(new Object[]{prod.getNombre(), prod.getCategoria(), prod.getPrecio(), prod.getStock(), prod.getEstado()});
+    }//GEN-LAST:event_jbtnBuscarActionPerformed
+
+    private void jbtSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtSalirActionPerformed
+        dispose();
+    }//GEN-LAST:event_jbtSalirActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jbtSalir;
+    private javax.swing.JButton jbtnBuscar;
+    private javax.swing.JLabel jlblInfo;
+    private javax.swing.JLabel jlblNombreProd;
+    private javax.swing.JLabel jlblTitulo;
+    private javax.swing.JTextField jtxtBuscar;
+    private javax.swing.JPanel panel;
+    private javax.swing.JTable tablaProductos;
     // End of variables declaration//GEN-END:variables
 }
