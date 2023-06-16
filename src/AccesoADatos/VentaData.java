@@ -1,5 +1,6 @@
 package AccesoADatos;
 
+import Entidades.Cliente;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import Entidades.Venta;
+import java.time.LocalDate;
 
 public class VentaData {
     private Connection conexion = null;
@@ -53,5 +55,36 @@ public class VentaData {
         }
         return venta;
     }
+    
+    
+    public List<Venta> obtenerVentasPorFecha(LocalDate fecha){
+        List <Venta> ventas = new ArrayList<>();
+
+        try {
+           String sql = "SELECT * FROM venta WHERE fecha = ?;";
+           PreparedStatement ps = conexion.prepareStatement(sql);
+           ps.setDate(1, Date.valueOf(fecha));
+           ResultSet rs = ps.executeQuery();
+           Venta vend;
+
+           while (rs.next()){
+               vend = new Venta();
+               vend.setIdVenta(rs.getInt("idVenta"));
+               vend.setFecha(rs.getDate("fecha").toLocalDate());
+
+               Cliente c = new Cliente();
+               c.setIdCliente(rs.getInt("idCliente"));
+               vend.setCliente(c);
+
+               ventas.add(vend);
+           }
+           ps.close();
+           } catch (SQLException ex){
+               JOptionPane.showMessageDialog(null, "Error al acceder a tabla Venta. Codigo: "+ex.getLocalizedMessage());
+
+           }
+        return ventas;
+    }
+
 
 }
