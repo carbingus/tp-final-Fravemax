@@ -1,12 +1,20 @@
 package Vistas;
 
+import AccesoADatos.CompraData;
+import AccesoADatos.DetalleCompraData;
 import AccesoADatos.ProductoData;
 import AccesoADatos.ProveedorData;
+import Entidades.Compra;
+import Entidades.DetalleCompra;
 import Entidades.Producto;
 import Entidades.Proveedor;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 
@@ -15,6 +23,10 @@ public class RealizarCompras extends javax.swing.JInternalFrame {
     Proveedor proveedor = null;
     ProductoData pd = new ProductoData();
     Producto producto = null;
+    DetalleCompraData dc = new DetalleCompraData();
+    DetalleCompra detalleCompra = null;
+    CompraData cd = new CompraData();
+    Compra compra = null;
     SpinnerNumberModel snm = new SpinnerNumberModel();
 
     public RealizarCompras() {
@@ -193,7 +205,23 @@ public class RealizarCompras extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        
+        if (txtFecha.getDate() == null) {
+            JOptionPane.showMessageDialog(this, "Te falto elegir la fecha!");
+        } else {
+            Date date = txtFecha.getDate();
+            LocalDate fecha = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            proveedor = (Proveedor)cmbProveedor.getSelectedItem();
+            compra = new Compra(proveedor, fecha);
+//            cd.guardarCompra(compra);
+            
+            int cantidad = Integer.parseInt(spinner.getValue().toString());
+            double precioCompra = Double.parseDouble(spinner.getValue().toString())*producto.getPrecio();
+            JOptionPane.showMessageDialog(this, precioCompra);
+            
+            
+            limpiar();
+            
+        }
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
@@ -208,7 +236,14 @@ public class RealizarCompras extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbProductoActionPerformed
 
-    
+    public void limpiar() { // revisar
+        if (producto.getStock() == 0) {
+            cmbProducto.removeItem(cmbProducto.getSelectedItem());
+        }
+        snm.setMaximum(producto.getStock());
+        spinner.setValue(1);
+        txtFecha.setDate(null);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
