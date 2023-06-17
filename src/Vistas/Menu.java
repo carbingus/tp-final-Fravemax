@@ -7,6 +7,7 @@ public class Menu extends javax.swing.JFrame {
     public Menu() {
         initComponents();
         setLocationRelativeTo(null);
+        setTitle("FraveMAX: Lider en Electrodomesticos");
     }
 
     @SuppressWarnings("unchecked")
@@ -28,6 +29,7 @@ public class Menu extends javax.swing.JFrame {
         vistaEliminarProveedor = new javax.swing.JMenuItem();
         menuVentas = new javax.swing.JMenu();
         vistaRealizarVenta = new javax.swing.JMenuItem();
+        vistaConsultarVentas = new javax.swing.JMenuItem();
         menuCompras = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
@@ -131,6 +133,14 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         menuVentas.add(vistaRealizarVenta);
+
+        vistaConsultarVentas.setText("Consultar Ventas");
+        vistaConsultarVentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vistaConsultarVentasActionPerformed(evt);
+            }
+        });
+        menuVentas.add(vistaConsultarVentas);
 
         barraMenu.add(menuVentas);
 
@@ -251,6 +261,13 @@ public class Menu extends javax.swing.JFrame {
         centrarVentana(inv);
     }//GEN-LAST:event_jmnStockActionPerformed
 
+    private void vistaConsultarVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vistaConsultarVentasActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        ConsultarVentas cV = new ConsultarVentas();
+        centrarVentana(cV);
+    }//GEN-LAST:event_vistaConsultarVentasActionPerformed
+
     public void centrarVentana(JInternalFrame ventana) {
         int x = escritorio.getWidth()/2 - ventana.getWidth()/2;
         int y = escritorio.getHeight()/2 - ventana.getHeight()/2;
@@ -308,6 +325,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenu menuVentas;
     private javax.swing.JMenuItem vistaAgregarCliente;
     private javax.swing.JMenuItem vistaAgregarProveedor;
+    private javax.swing.JMenuItem vistaConsultarVentas;
     private javax.swing.JMenuItem vistaEliminarCliente;
     private javax.swing.JMenuItem vistaEliminarProducto;
     private javax.swing.JMenuItem vistaEliminarProveedor;
