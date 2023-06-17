@@ -5,9 +5,10 @@
  */
 package Vistas;
 
-import AccesoADatos.ProductoData;
-import Entidades.Producto;
+import AccesoADatos.*;
+import Entidades.*;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -17,9 +18,9 @@ import javax.swing.table.DefaultTableModel;
 
 public class Inventario extends javax.swing.JInternalFrame {
 
-      private DefaultTableModel tablin;
+    private DefaultTableModel tablin;
     private ProductoData prodData;
-    private ArrayList<Producto> productos;
+    private ArrayList<Producto> listaProductos;
     /**
      * Creates new form Inventario
      */
@@ -27,24 +28,30 @@ public class Inventario extends javax.swing.JInternalFrame {
         initComponents();
         setTitle("Lista de productos");
         setResizable(false);
-        tablin = new DefaultTableModel();
+        tablin = new DefaultTableModel(){
+            @Override
+            public boolean isCellEditable(int fila, int columna){
+                return false;
+            }
+        };
         prodData = new ProductoData();
-        generarTabla();
+        
+        generarTablin();
     }
     
-    private void generarTabla(){
+    private void generarTablin(){
         ArrayList<Object> columnas = new ArrayList<>();
         columnas.add("ID");
-        columnas.add("Nombre");
-        columnas.add("Categoria");
-        columnas.add("Precio");
-        columnas.add("Stock");
-        columnas.add("Estado");
+        columnas.add("NOMBRE");
+        columnas.add("CATEGORIA");
+        columnas.add("PRECIO");
+        columnas.add("STOCK");
+        columnas.add("ESTADO");
 
         for (Object columna : columnas) {
             tablin.addColumn(columna);
         }
-        tablaProductos.setModel(tablin); 
+        jtblProductos.setModel(tablin); 
 
         limpiarTablin();
         accederTablin();
@@ -59,9 +66,9 @@ public class Inventario extends javax.swing.JInternalFrame {
     }
     
     private void accederTablin(){
-         productos = (ArrayList<Producto>) prodData.listarProductos();
+         listaProductos = (ArrayList<Producto>) prodData.listarProductos();
 
-        for (Producto prod : productos) {
+        for (Producto prod : listaProductos) {
 
             String estado;
             if (prod.getEstado()) {
@@ -89,7 +96,7 @@ public class Inventario extends javax.swing.JInternalFrame {
         jtxtBuscar = new javax.swing.JTextField();
         jbtnBuscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablaProductos = new javax.swing.JTable();
+        jtblProductos = new javax.swing.JTable();
         jlblInfo = new javax.swing.JLabel();
         jbtSalir = new javax.swing.JButton();
 
@@ -114,7 +121,7 @@ public class Inventario extends javax.swing.JInternalFrame {
             }
         });
 
-        tablaProductos.setModel(new javax.swing.table.DefaultTableModel(
+        jtblProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -125,7 +132,7 @@ public class Inventario extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(tablaProductos);
+        jScrollPane1.setViewportView(jtblProductos);
 
         jlblInfo.setFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
         jlblInfo.setForeground(new java.awt.Color(0, 0, 0));
@@ -212,12 +219,10 @@ public class Inventario extends javax.swing.JInternalFrame {
     private void jbtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnBuscarActionPerformed
         limpiarTablin();
         String nombre = jtxtBuscar.getText();
-
         Producto prod = prodData.buscarProductosPorNombre(nombre);
-        
-        
 
         tablin.addRow(new Object[]{prod.getIdProducto(), prod.getNombre(), prod.getCategoria(), prod.getPrecio(), prod.getStock(), prod.getEstado()});
+
     }//GEN-LAST:event_jbtnBuscarActionPerformed
 
     private void jbtSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtSalirActionPerformed
@@ -232,8 +237,8 @@ public class Inventario extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jlblInfo;
     private javax.swing.JLabel jlblNombreProd;
     private javax.swing.JLabel jlblTitulo;
+    private javax.swing.JTable jtblProductos;
     private javax.swing.JTextField jtxtBuscar;
     private javax.swing.JPanel panel;
-    private javax.swing.JTable tablaProductos;
     // End of variables declaration//GEN-END:variables
 }
