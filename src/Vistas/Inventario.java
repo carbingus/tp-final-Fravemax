@@ -210,13 +210,14 @@ public class Inventario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtxtBuscarActionPerformed
 
     private void jbtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnBuscarActionPerformed
-
         limpiarTablin();
         String nombre = jtxtBuscar.getText();
 
         Producto prod = prodData.buscarProductosPorNombre(nombre);
+        
+        
 
-        tablin.addRow(new Object[]{prod.getNombre(), prod.getCategoria(), prod.getPrecio(), prod.getStock(), prod.getEstado()});
+        tablin.addRow(new Object[]{prod.getIdProducto(), prod.getNombre(), prod.getCategoria(), prod.getPrecio(), prod.getStock(), prod.getEstado()});
     }//GEN-LAST:event_jbtnBuscarActionPerformed
 
     private void jbtSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtSalirActionPerformed

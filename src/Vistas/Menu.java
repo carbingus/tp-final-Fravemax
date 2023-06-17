@@ -31,6 +31,7 @@ public class Menu extends javax.swing.JFrame {
         menuCompras = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
+        jmnStock = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -146,6 +147,15 @@ public class Menu extends javax.swing.JFrame {
         barraMenu.add(menuCompras);
 
         jMenu6.setText("Inventario");
+
+        jmnStock.setText("Consultar Stock");
+        jmnStock.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmnStockActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jmnStock);
+
         barraMenu.add(jMenu6);
 
         setJMenuBar(barraMenu);
@@ -234,6 +244,13 @@ public class Menu extends javax.swing.JFrame {
         centrarVentana(rc);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void jmnStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmnStockActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        Inventario inv = new Inventario();
+        centrarVentana(inv);
+    }//GEN-LAST:event_jmnStockActionPerformed
+
     public void centrarVentana(JInternalFrame ventana) {
         int x = escritorio.getWidth()/2 - ventana.getWidth()/2;
         int y = escritorio.getHeight()/2 - ventana.getHeight()/2;
@@ -283,6 +300,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JDesktopPane escritorio;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jmnStock;
     private javax.swing.JMenu menuClientes;
     private javax.swing.JMenu menuCompras;
     private javax.swing.JMenu menuProductos;

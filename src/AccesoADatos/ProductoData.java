@@ -146,7 +146,7 @@ public class ProductoData {
                 producto.setPrecio(rs.getDouble("precio"));
                 producto.setStock(rs.getInt("stock"));
                 producto.setEstado(rs.getBoolean("estado"));
-                
+                productos.add(producto);
             }
             ps.close();
         } catch(SQLException ex){
@@ -156,7 +156,7 @@ public class ProductoData {
     }
         
         public Producto buscarProductosPorNombre(String nombre){
-        String sql = "SELECT * FROM producto WHERE nombre = ?;";
+        String sql = "SELECT * FROM producto WHERE nombre LIKE ?;";
         Producto pr = null;
         
         try{
@@ -174,7 +174,7 @@ public class ProductoData {
                 pr.setStock(rs.getInt("stock"));
                 pr.setEstado(rs.getBoolean("estado"));
             } else {
-                JOptionPane.showMessageDialog(null, "No hay productos en esta categoria.");
+                JOptionPane.showMessageDialog(null, "No existen productos con el nombre indicado.");
             }
             
         } catch (SQLException ex) {
@@ -183,5 +183,29 @@ public class ProductoData {
         
         return pr;
     }
+        
+        public List<Producto> listarProductosPorNombre(String nombre){
+            List<Producto> productos = new ArrayList<>();
+        try{
+            String sql = "SELECT * FROM producto WHERE nombre LIKE ?;";
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setString(1,nombre);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                Producto producto = new Producto();
+                producto.setIdProducto(rs.getInt("idProducto"));
+                producto.setNombre(rs.getString("nombre"));
+                producto.setCategoria(rs.getString("categoria"));
+                producto.setPrecio(rs.getDouble("precio"));
+                producto.setStock(rs.getInt("stock"));
+                producto.setEstado(rs.getBoolean("estado"));
+                
+            }
+            ps.close();
+        } catch(SQLException ex){
+            JOptionPane.showConfirmDialog(null, "Error al acceder a tabla Producto. Codigo: " +ex.getLocalizedMessage());
+        
+        } return productos;
+        }
     
 }
