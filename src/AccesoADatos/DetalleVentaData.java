@@ -39,26 +39,27 @@ public class DetalleVentaData {
         }
     }
     
-    public List<DetalleVenta> listarDetalleVentas() {
-        List<DetalleVenta> lista = new ArrayList();
-        String sql = "SELECT * FROM detalleVenta";
+    public DetalleVenta listarDetalleVentas(int idVenta) {
+        DetalleVenta detVenta = null;
+        String sql = "SELECT * FROM detalleVenta WHERE idVenta = ?;";
         try {
             PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setInt(1, idVenta);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                DetalleVenta dv = new DetalleVenta();
-                dv.setIdDetalleVenta(rs.getInt("idDetalleVenta"));
-                dv.setCantidad(rs.getInt("cantidad"));
-                dv.setPrecioVenta(rs.getDouble("precioVenta"));
-                dv.setVenta(ventaData.buscarVenta(rs.getInt("idVenta")));
-                dv.setProducto(productoData.buscarProducto(rs.getInt("idProducto")));
-                lista.add(dv);
+                detVenta = new DetalleVenta();
+                detVenta.setIdDetalleVenta(rs.getInt("idDetalleVenta"));
+                detVenta.setCantidad(rs.getInt("cantidad"));
+                detVenta.setPrecioVenta(rs.getDouble("precioVenta"));
+                detVenta.setVenta(ventaData.buscarVenta(rs.getInt("idVenta")));
+                detVenta.setProducto(productoData.buscarProducto(rs.getInt("idProducto")));
+                
             }
             ps.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error: "+e.getLocalizedMessage());
         }
-        return lista;
+        return detVenta;
     }
     
 }
