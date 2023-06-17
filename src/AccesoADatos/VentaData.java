@@ -57,13 +57,12 @@ public class VentaData {
     }
     
     
-    public List<Venta> obtenerVentasPorFecha(LocalDate fecha){
+    public List<Venta> obtenerVentas(){
         List <Venta> ventas = new ArrayList<>();
 
         try {
-           String sql = "SELECT * FROM venta WHERE fecha = ?;";
+           String sql = "SELECT * FROM venta;";
            PreparedStatement ps = conexion.prepareStatement(sql);
-           ps.setDate(1, Date.valueOf(fecha));
            ResultSet rs = ps.executeQuery();
            Venta vend;
 
