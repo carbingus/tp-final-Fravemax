@@ -250,8 +250,13 @@ public class RealizarVentas extends javax.swing.JInternalFrame {
 
     private void cmbProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbProductoActionPerformed
         producto = (Producto)cmbProducto.getSelectedItem();
-        txtPrecioUnidad.setText("$ "+producto.getPrecio()*1.3+"");
-        txtPrecioTotal.setText("$ "+producto.getPrecio()*1.3+"");
+        if (cmbProducto.getSelectedItem() == "") {
+            txtPrecioUnidad.setText("-/-");
+            txtPrecioTotal.setText("-/-");
+        } else {
+            txtPrecioUnidad.setText("$ "+producto.getPrecio()*1.3+"");
+            txtPrecioTotal.setText("$ "+producto.getPrecio()*1.3+"");
+        }
         snm.setMaximum(producto.getStock());
         spinner.setValue(1);
     }//GEN-LAST:event_cmbProductoActionPerformed
