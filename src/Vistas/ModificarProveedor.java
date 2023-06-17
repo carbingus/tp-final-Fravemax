@@ -13,6 +13,8 @@ public class ModificarProveedor extends javax.swing.JInternalFrame {
 
     public ModificarProveedor() {
         initComponents();
+        setTitle("Actualizacion de datos de Proveedores");
+        setResizable(false);
         
         List<Proveedor> listaProveedores = pd.listarProveedores();
         

@@ -11,6 +11,8 @@ public class RegistrarProducto extends javax.swing.JInternalFrame {
     public RegistrarProducto() {
         initComponents();
         txtNombre.requestFocus();
+        setTitle("Registro de Productos");
+        setResizable(false);
     }
 
     @SuppressWarnings("unchecked")

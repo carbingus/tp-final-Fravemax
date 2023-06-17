@@ -11,6 +11,8 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
     public AgregarCliente() {
         initComponents();
         txtDni.requestFocus();
+        setTitle("Registro de Clientes");
+        setResizable(false);
     }
     
     @SuppressWarnings("unchecked")

@@ -13,6 +13,8 @@ public class EliminarProveedor extends javax.swing.JInternalFrame {
 
     public EliminarProveedor() {
         initComponents();
+        setTitle("Eliminacion de Proveedores");
+        setResizable(false);
         
         List<Proveedor> listaProveedores = pd.listarProveedores();
         

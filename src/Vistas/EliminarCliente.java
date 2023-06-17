@@ -13,6 +13,8 @@ public class EliminarCliente extends javax.swing.JInternalFrame {
 
     public EliminarCliente() {
         initComponents();
+        setTitle("Limpieza de Clientes");
+        setResizable(false);
         
         List<Cliente> listaClientes = cd.listarClientes();
         

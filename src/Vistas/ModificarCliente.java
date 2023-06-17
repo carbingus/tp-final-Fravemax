@@ -13,6 +13,8 @@ public class ModificarCliente extends javax.swing.JInternalFrame {
 
     public ModificarCliente() {
         initComponents();
+        setTitle("Actualizacion de datos de Clientes");
+        setResizable(false);
         
         habilitarTxt(false);
         btnModificar.setEnabled(false);

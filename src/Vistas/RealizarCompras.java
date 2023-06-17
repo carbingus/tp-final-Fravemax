@@ -31,6 +31,8 @@ public class RealizarCompras extends javax.swing.JInternalFrame {
 
     public RealizarCompras() {
         initComponents();
+        setTitle("Pedidos a Proveedores");
+        setResizable(false);
         
         List<Proveedor> listaProveedores = pvd.listarProveedores();
         Collections.sort(listaProveedores, new Comparator<Proveedor>() {

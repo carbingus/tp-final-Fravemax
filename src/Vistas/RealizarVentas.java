@@ -31,6 +31,8 @@ public class RealizarVentas extends javax.swing.JInternalFrame {
 
     public RealizarVentas() {
         initComponents();
+        setTitle("Formulario de Ventas");
+        setResizable(false);
         
         List<Cliente> listaClientes = cd.listarClientes();
         Collections.sort(listaClientes, new Comparator<Cliente>() {

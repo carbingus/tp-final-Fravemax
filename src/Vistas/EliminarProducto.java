@@ -13,6 +13,8 @@ public class EliminarProducto extends javax.swing.JInternalFrame {
 
     public EliminarProducto() {
         initComponents();
+        setTitle("Eliminacion de Productos");
+        setResizable(false);
         
         List<Producto> listaProductos = pd.listarProductosSinStock();
         

@@ -11,6 +11,8 @@ public class AgregarProveedor extends javax.swing.JInternalFrame {
     public AgregarProveedor() {
         initComponents();
         txtRazonSocial.requestFocus();
+        setTitle("Registro de Proveedores");
+        setResizable(false);
     }
 
     @SuppressWarnings("unchecked")
