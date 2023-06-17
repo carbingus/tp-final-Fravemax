@@ -4,6 +4,11 @@
  * and open the template in the editor.
  */
 package Vistas;
+import Entidades.*;
+import AccesoADatos.*;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -11,11 +16,66 @@ package Vistas;
  */
 public class ConsultarVentas extends javax.swing.JInternalFrame {
 
+    private DefaultTableModel tobleron;
+    private ProductoData proData;
+    private List<Venta> ventas;
+    private VentaData venData;
+    private Venta ventaActual;
+    private DetalleVentaData detVenData;
+    private DetalleVenta detVenta;
+    private ClienteData clienData;
     /**
      * Creates new form ConsultarVentas
      */
     public ConsultarVentas() {
         initComponents();
+        setTitle("Listado de ventas");
+        setResizable(false);
+        tobleron = new DefaultTableModel(){
+            @Override
+            public boolean isCellEditable(int fila, int columna){
+                return false;
+            }
+        };
+        proData = new ProductoData();
+        clienData = new ClienteData();
+        detVenData = new DetalleVentaData();
+        ventaActual = new Venta();
+        ventas = new ArrayList<>();
+        detVenta = new DetalleVenta();
+        venData = new VentaData();
+        generarTablin();
+        accederTablin();
+        
+    }
+    
+    private void generarTablin(){
+        ArrayList<Object> columna = new ArrayList<>();
+        columna.add("ID");
+        columna.add("FECHA");
+        columna.add("PRODUCTO");
+        columna.add("CANTIDAD");
+        columna.add("PRECIO");
+        columna.add("NOMBRE");
+        columna.add("APELLIDO");
+        columna.add("TELEFONO");
+        
+        for (Object columnas : columna){
+            tobleron.addColumn(columnas);
+        }
+        jtblVentas.setModel(tobleron);
+    }
+    private void accederTablin(){
+        ventas = venData.obtenerVentas();
+        
+        for (Venta vendin : ventas){
+            Cliente clien = clienData.buscarCliente(vendin.getCliente().getIdCliente());
+            DetalleVenta detVendin = detVenData.listarDetalleVentas(vendin.getIdVenta());
+            
+            tobleron.addRow(new Object[]{vendin.getIdVenta(), vendin.getFecha(), clien.getNombre(),
+                clien.getApellido(), clien.getTelefono(), detVendin.getProducto().getNombre(),
+                detVendin.getCantidad(), detVendin.getPrecioVenta()});
+        }
     }
 
     /**
@@ -27,21 +87,81 @@ public class ConsultarVentas extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane = new javax.swing.JScrollPane();
+        jtblVentas = new javax.swing.JTable();
+        lblTitulo = new javax.swing.JLabel();
+        jbtSalir = new javax.swing.JButton();
+
+        jtblVentas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane.setViewportView(jtblVentas);
+
+        lblTitulo.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        lblTitulo.setText("Listado de ventas");
+
+        jbtSalir.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jbtSalir.setText("Salir");
+        jbtSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtSalirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(256, 256, 256)
+                        .addComponent(lblTitulo))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(294, 294, 294)
+                        .addComponent(jbtSalir)))
+                .addContainerGap(269, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jScrollPane)
+                    .addContainerGap()))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addComponent(lblTitulo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 422, Short.MAX_VALUE)
+                .addComponent(jbtSalir)
+                .addContainerGap())
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(131, 131, 131)
+                    .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(132, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jbtSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtSalirActionPerformed
+        dispose();
+    }//GEN-LAST:event_jbtSalirActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane jScrollPane;
+    private javax.swing.JButton jbtSalir;
+    private javax.swing.JTable jtblVentas;
+    private javax.swing.JLabel lblTitulo;
     // End of variables declaration//GEN-END:variables
 }
