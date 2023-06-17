@@ -1,12 +1,20 @@
 package Vistas;
 
+import AccesoADatos.CompraData;
+import AccesoADatos.DetalleCompraData;
 import AccesoADatos.ProductoData;
 import AccesoADatos.ProveedorData;
+import Entidades.Compra;
+import Entidades.DetalleCompra;
 import Entidades.Producto;
 import Entidades.Proveedor;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 
@@ -15,6 +23,10 @@ public class RealizarCompras extends javax.swing.JInternalFrame {
     Proveedor proveedor = null;
     ProductoData pd = new ProductoData();
     Producto producto = null;
+    DetalleCompraData dc = new DetalleCompraData();
+    DetalleCompra detalleCompra = null;
+    CompraData cd = new CompraData();
+    Compra compra = null;
     SpinnerNumberModel snm = new SpinnerNumberModel();
 
     public RealizarCompras() {
@@ -30,7 +42,7 @@ public class RealizarCompras extends javax.swing.JInternalFrame {
             cmbProveedor.addItem(proveedor);
         }
         
-        List<Producto> listaProductos = pd.listarProductosConStock();
+        List<Producto> listaProductos = pd.listarProductos();
         Collections.sort(listaProductos, new Comparator<Producto>() {
             public int compare(Producto o1, Producto o2) {
                 return o1.toString().compareTo(o2.toString());
@@ -44,6 +56,9 @@ public class RealizarCompras extends javax.swing.JInternalFrame {
         snm.setValue(1);
         spinner.setModel(snm);
         ((JSpinner.DefaultEditor) spinner.getEditor()).getTextField().setEditable(false);
+        
+        txtFecha.setMinSelectableDate(new Date());
+        txtFecha.setMaxSelectableDate(new Date());
     }
 
     @SuppressWarnings("unchecked")
@@ -193,7 +208,26 @@ public class RealizarCompras extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        
+        if (txtFecha.getDate() == null) {
+            JOptionPane.showMessageDialog(this, "Te falto elegir la fecha!");
+        } else {
+            Date date = txtFecha.getDate();
+            LocalDate fecha = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            proveedor = (Proveedor)cmbProveedor.getSelectedItem();
+            compra = new Compra(proveedor, fecha);
+            cd.guardarCompra(compra);
+
+            int cantidad = Integer.parseInt(spinner.getValue().toString());
+            double precioCosto = Double.parseDouble(spinner.getValue().toString())*producto.getPrecio();
+            detalleCompra = new DetalleCompra(cantidad, precioCosto, compra, producto);
+            dc.guardarDetalleCompra(detalleCompra);
+            
+            producto.setStock(producto.getStock() + cantidad);
+            pd.modificarProducto(producto);
+            
+            JOptionPane.showMessageDialog(this, "Compra exitosa!");
+            limpiar();
+        }
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
@@ -201,13 +235,20 @@ public class RealizarCompras extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void spinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spinnerStateChanged
-        // TODO add your handling code here:
+        txtPrecioTotal.setText("$ "+Double.parseDouble(spinner.getValue().toString())*producto.getPrecio()+"");
     }//GEN-LAST:event_spinnerStateChanged
 
     private void cmbProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbProductoActionPerformed
-        // TODO add your handling code here:
+        producto = (Producto)cmbProducto.getSelectedItem();
+        txtPrecioUnidad.setText("$ "+producto.getPrecio()+"");
+        txtPrecioTotal.setText("$ "+producto.getPrecio()+"");
+        spinner.setValue(1);
     }//GEN-LAST:event_cmbProductoActionPerformed
 
+    public void limpiar() {
+        spinner.setValue(1);
+        txtFecha.setDate(null);
+    }
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
