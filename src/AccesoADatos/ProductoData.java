@@ -156,12 +156,12 @@ public class ProductoData {
     }
         
         public Producto buscarProductosPorNombre(String nombre){
-        String sql = "SELECT * FROM producto WHERE nombre LIKE ?;";
+        String sql = "SELECT * FROM producto WHERE nombre LIKE ?";
         Producto pr = null;
         
         try{
             PreparedStatement ps = conexion.prepareStatement(sql);
-            ps.setString(1, nombre);
+            ps.setString(1, "%"+ nombre+ "%");
             
             ResultSet rs = ps.executeQuery();
             
@@ -187,9 +187,9 @@ public class ProductoData {
         public List<Producto> listarProductosPorNombre(String nombre){
             List<Producto> productos = new ArrayList<>();
         try{
-            String sql = "SELECT * FROM producto WHERE nombre LIKE ?;";
+            String sql = "SELECT * FROM producto WHERE nombre LIKE ?";
             PreparedStatement ps = conexion.prepareStatement(sql);
-            ps.setString(1,nombre);
+            ps.setString(1,"%" + nombre + "%");
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
                 Producto producto = new Producto();
