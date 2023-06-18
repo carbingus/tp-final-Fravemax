@@ -106,7 +106,6 @@ public class Inventario extends javax.swing.JInternalFrame {
         jbtnBuscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtblProductos = new javax.swing.JTable();
-        jlblInfo = new javax.swing.JLabel();
         jbtSalir = new javax.swing.JButton();
 
         setResizable(true);
@@ -145,10 +144,6 @@ public class Inventario extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jtblProductos);
 
-        jlblInfo.setFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
-        jlblInfo.setForeground(new java.awt.Color(0, 0, 0));
-        jlblInfo.setText("*Para editar detalles, haga doble click en el campo que quiera modificar");
-
         jbtSalir.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jbtSalir.setText("Salir");
         jbtSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -164,26 +159,20 @@ public class Inventario extends javax.swing.JInternalFrame {
             .addComponent(jScrollPane1)
             .addGroup(panelLayout.createSequentialGroup()
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jlblInfo))
                     .addGroup(panelLayout.createSequentialGroup()
-                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(85, 85, 85)
+                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jlblTitulo)
                             .addGroup(panelLayout.createSequentialGroup()
-                                .addGap(85, 85, 85)
-                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jlblTitulo)
-                                    .addGroup(panelLayout.createSequentialGroup()
-                                        .addComponent(jlblNombreProd)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jtxtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jlblNombreProd)
                                 .addGap(18, 18, 18)
-                                .addComponent(jbtnBuscar))
-                            .addGroup(panelLayout.createSequentialGroup()
-                                .addGap(269, 269, 269)
-                                .addComponent(jbtSalir)))
-                        .addGap(0, 170, Short.MAX_VALUE)))
-                .addContainerGap())
+                                .addComponent(jtxtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jbtnBuscar))
+                    .addGroup(panelLayout.createSequentialGroup()
+                        .addGap(269, 269, 269)
+                        .addComponent(jbtSalir)))
+                .addContainerGap(176, Short.MAX_VALUE))
         );
         panelLayout.setVerticalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -194,9 +183,7 @@ public class Inventario extends javax.swing.JInternalFrame {
                     .addComponent(jtxtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbtnBuscar)
                     .addComponent(jlblNombreProd, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(13, 13, 13)
-                .addComponent(jlblInfo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(39, 39, 39)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addComponent(jbtSalir)
@@ -262,7 +249,6 @@ public class Inventario extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbtSalir;
     private javax.swing.JButton jbtnBuscar;
-    private javax.swing.JLabel jlblInfo;
     private javax.swing.JLabel jlblNombreProd;
     private javax.swing.JLabel jlblTitulo;
     private javax.swing.JTable jtblProductos;
