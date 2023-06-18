@@ -27,19 +27,25 @@ public class DetalleVentaData {
             ps.setDouble(2, dv.getPrecioVenta());
             ps.setInt(3, dv.getVenta().getIdVenta());
             ps.setInt(4, dv.getProducto().getIdProducto());
-            ps.executeUpdate();
-            ResultSet rs = ps.getGeneratedKeys();
-            if (rs.next()){
-                dv.setIdDetalleVenta(rs.getInt(1));
+            int logro = ps.executeUpdate();
+//            ResultSet rs = ps.getGeneratedKeys();
+            if (logro == 1){
+                JOptionPane.showMessageDialog(null, "Los detalles de la venta se han reigstrado");
+            } else{
+                JOptionPane.showConfirmDialog(null, "Los detalles de la venta no se han podido registrar.");
+                        
             }
-            System.out.println("DetalleVenta guardado!");
+//            if (rs.next()){
+//                dv.setIdDetalleVenta(rs.getInt(1));
+//            }
+//            System.out.println("DetalleVenta guardado!");
             ps.close();
         } catch (SQLException e){
             JOptionPane.showMessageDialog(null, "Error: "+e.getLocalizedMessage());
         }
     }
     
-    public DetalleVenta listarDetalleVentas(int idVenta) {
+    public DetalleVenta listarDetalleVenta(int idVenta) {
         DetalleVenta detVenta = null;
         String sql = "SELECT * FROM detalleVenta WHERE idVenta = ?;";
         try {
@@ -52,7 +58,7 @@ public class DetalleVentaData {
                 detVenta.setCantidad(rs.getInt("cantidad"));
                 detVenta.setPrecioVenta(rs.getDouble("precioVenta"));
                 detVenta.setVenta(ventaData.buscarVenta(rs.getInt("idVenta")));
-                detVenta.setProducto(productoData.buscarProducto(rs.getInt("idProducto")));
+                detVenta.setProducto(productoData.buscarProductoPorID(rs.getInt("idProducto")));
                 
             }
             ps.close();

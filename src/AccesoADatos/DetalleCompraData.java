@@ -27,15 +27,16 @@ public class DetalleCompraData {
             ps.setDouble(2, dc.getPrecioCosto());
             ps.setInt(3, dc.getCompra().getIdCompra());
             ps.setInt(4, dc.getProducto().getIdProducto());
-            ps.executeUpdate();
-            ResultSet rs = ps.getGeneratedKeys();
-            if (rs.next()){
-                dc.setIdDetalle(rs.getInt(1));
+            int logro = ps.executeUpdate();
+//            ResultSet rs = ps.getGeneratedKeys();
+            if (logro == 1){
+                JOptionPane.showMessageDialog(null, "Los detalles del pedido se han registrado");
+            } else{
+                JOptionPane.showMessageDialog(null, "Los detalles del pedido no se han podido registrar.");
             }
-            System.out.println("DetalleCompra guardado!");
             ps.close();
-        } catch (SQLException e){
-            JOptionPane.showMessageDialog(null, "Error: "+e.getLocalizedMessage());
+        } catch (SQLException ex){
+            JOptionPane.showMessageDialog(null, "Error al acceder a tabla DetalleCompra. Codigo: "+ex.getLocalizedMessage());
         }
     }
     
@@ -51,7 +52,7 @@ public class DetalleCompraData {
                 dc.setCantidad(rs.getInt("cantidad"));
                 dc.setPrecioCosto(rs.getDouble("precioCosto"));
                 dc.setCompra(compraData.buscarCompra(rs.getInt("idCompra")));
-                dc.setProducto(productoData.buscarProducto(rs.getInt("idProducto")));
+                dc.setProducto(productoData.buscarProductoPorID(rs.getInt("idProducto")));
                 lista.add(dc);
             }
             ps.close();

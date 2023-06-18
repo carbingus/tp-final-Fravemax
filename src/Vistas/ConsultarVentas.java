@@ -30,7 +30,7 @@ public class ConsultarVentas extends javax.swing.JInternalFrame {
     public ConsultarVentas() {
         initComponents();
         setTitle("Listado de ventas");
-        setResizable(false);
+//        setResizable(false);
         tobleron = new DefaultTableModel(){
             @Override
             public boolean isCellEditable(int fila, int columna){
@@ -70,11 +70,18 @@ public class ConsultarVentas extends javax.swing.JInternalFrame {
         
         for (Venta vendin : ventas){
             Cliente clien = clienData.buscarCliente(vendin.getCliente().getIdCliente());
-            DetalleVenta detVendin = detVenData.listarDetalleVentas(vendin.getIdVenta());
+            DetalleVenta detVendin = detVenData.listarDetalleVenta(vendin.getIdVenta());
             
-            tobleron.addRow(new Object[]{vendin.getIdVenta(), vendin.getFecha(), clien.getNombre(),
-                clien.getApellido(), clien.getTelefono(), detVendin.getProducto().getNombre(),
-                detVendin.getCantidad(), detVendin.getPrecioVenta()});
+            tobleron.addRow(new Object[]{
+                vendin.getIdVenta(),
+                vendin.getFecha(), 
+                detVendin.getProducto().getNombre(),
+                detVendin.getCantidad(), 
+                detVendin.getPrecioVenta(),
+                clien.getNombre(),
+                clien.getApellido(),
+                clien.getTelefono(), 
+                });
         }
     }
 

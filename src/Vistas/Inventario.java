@@ -5,8 +5,8 @@
  */
 package Vistas;
 
-import AccesoADatos.*;
-import Entidades.*;
+import AccesoADatos.ProductoData;
+import Entidades.Producto;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -27,7 +27,7 @@ public class Inventario extends javax.swing.JInternalFrame {
     public Inventario() {
         initComponents();
         setTitle("Lista de productos");
-        setResizable(false);
+//        setResizable(false);
         tablin = new DefaultTableModel(){
             @Override
             public boolean isCellEditable(int fila, int columna){
@@ -42,11 +42,11 @@ public class Inventario extends javax.swing.JInternalFrame {
     private void generarTablin(){
         ArrayList<Object> columnas = new ArrayList<>();
         columnas.add("ID");
-        columnas.add("NOMBRE");
-        columnas.add("CATEGORIA");
-        columnas.add("PRECIO");
-        columnas.add("STOCK");
-        columnas.add("ESTADO");
+        columnas.add("Nombre");
+        columnas.add("Categoria");
+        columnas.add("Price");
+        columnas.add("Stock");
+        columnas.add("Estado");
 
         for (Object columna : columnas) {
             tablin.addColumn(columna);
@@ -66,7 +66,9 @@ public class Inventario extends javax.swing.JInternalFrame {
     }
     
     private void accederTablin(){
+        System.out.println("generando tablin");
          listaProductos = (ArrayList<Producto>) prodData.listarProductos();
+         System.out.println("Product count: " + listaProductos.size());
 
         for (Producto prod : listaProductos) {
 
@@ -77,7 +79,14 @@ public class Inventario extends javax.swing.JInternalFrame {
                 estado = "No disponible";
             }
 
-            tablin.addRow(new Object[]{prod.getIdProducto(), prod.getNombre(), prod.getCategoria(), prod.getPrecio(), prod.getStock(), estado});
+            tablin.addRow(new Object[]{
+                prod.getIdProducto(), 
+                prod.getNombre(), 
+                prod.getCategoria(), 
+                prod.getPrecio(), 
+                prod.getStock(), 
+                estado
+            });
         }
     }
 
@@ -99,6 +108,8 @@ public class Inventario extends javax.swing.JInternalFrame {
         jtblProductos = new javax.swing.JTable();
         jlblInfo = new javax.swing.JLabel();
         jbtSalir = new javax.swing.JButton();
+
+        setResizable(true);
 
         jlblTitulo.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
         jlblTitulo.setText("Lista de productos");
@@ -217,11 +228,28 @@ public class Inventario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtxtBuscarActionPerformed
 
     private void jbtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnBuscarActionPerformed
-        limpiarTablin();
+        
+//        accederTablin();
         String nombre = jtxtBuscar.getText();
-        Producto prod = prodData.buscarProductosPorNombre(nombre);
-
-        tablin.addRow(new Object[]{prod.getIdProducto(), prod.getNombre(), prod.getCategoria(), prod.getPrecio(), prod.getStock(), prod.getEstado()});
+        
+        limpiarTablin();
+        
+        List<Producto> resultadoBusqueda = prodData.listarProductosPorNombre(nombre);
+        
+//        Producto prod = prodData.buscarProductosNombreParcial(nombre);
+        for (Producto prod : resultadoBusqueda){
+            String estado = prod.getEstado() ? "Disponible" : "No disponible";
+        
+        tablin.addRow(new Object[]{
+            prod.getIdProducto(),
+            prod.getNombre(),
+            prod.getCategoria(), 
+            prod.getPrecio(), 
+            prod.getStock(), 
+            estado
+        });
+        }
+        
 
     }//GEN-LAST:event_jbtnBuscarActionPerformed
 
