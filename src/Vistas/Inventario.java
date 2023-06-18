@@ -44,7 +44,7 @@ public class Inventario extends javax.swing.JInternalFrame {
         columnas.add("ID");
         columnas.add("Nombre");
         columnas.add("Categoria");
-        columnas.add("Price");
+        columnas.add("Precio");
         columnas.add("Stock");
         columnas.add("Estado");
 
