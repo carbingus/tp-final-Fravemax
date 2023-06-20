@@ -37,17 +37,22 @@ public class CompraData {
     
     public Compra buscarCompra(int id) {
         Compra compra = null;
-        String sql = "SELECT * FROM compra WHERE idCompra=?";
+        String sql = "SELECT * FROM compra WHERE idCompra = ?";
+        
         try {
             PreparedStatement ps = conexion.prepareStatement(sql);
             ps.setInt(1, id);
+            
             ResultSet rs = ps.executeQuery();
+            
             if (rs.next()) {
                 compra = new Compra(id, proveedorData.buscarProveedor(rs.getInt("idProvedor")), rs.getDate("fecha").toLocalDate());
             }
+            
             ps.close();
+            
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error: "+e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a tabla Compra. Codigo: "+e.getMessage());
         }
         return compra;
     }
