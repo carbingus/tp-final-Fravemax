@@ -65,7 +65,7 @@ public class ProductoData {
             
             if (logro == 1){
                 
-                JOptionPane.showMessageDialog(null, "Los datos del producto se han actualizado de forma correcta.");
+                System.out.println( "Los datos del producto se han actualizado de forma correcta.");
                 
             } else {
                 

@@ -37,7 +37,7 @@ public class DetalleCompraData {
 
             if (logro == 1){
                 
-                JOptionPane.showMessageDialog(null, "Los detalles del pedido se han registrado");
+                System.out.println("Los detalles del pedido se han registrado");
                 
             } else{
                 

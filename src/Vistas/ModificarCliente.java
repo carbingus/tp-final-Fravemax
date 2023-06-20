@@ -219,7 +219,7 @@ public class ModificarCliente extends javax.swing.JInternalFrame {
             cliente.setDomicilio(txtDomicilio.getText());
             cliente.setTelefono(txtTelefono.getText());
             cd.modificarCliente(cliente);
-            JOptionPane.showMessageDialog(this, "Cliente modificado con exito!");
+//            JOptionPane.showMessageDialog(this, "Cliente modificado con exito!");
             habilitarTxt(false);
             btnModificar.setEnabled(false);
         }

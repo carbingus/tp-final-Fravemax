@@ -36,7 +36,7 @@ public class DetalleVentaData {
 
             if (logro == 1){
                 
-                JOptionPane.showMessageDialog(null, "Los detalles de la venta se han reigstrado");
+                System.out.println("Los detalles de la venta se han registrado");
                 
             } else{
                 
