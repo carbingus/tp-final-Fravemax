@@ -157,7 +157,7 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAgregar)
                     .addComponent(btnSalir))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
@@ -166,6 +166,8 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         if (txtDni.getText().trim().isEmpty() || txtApellido.getText().trim().isEmpty() || txtNombre.getText().trim().isEmpty() || txtDomicilio.getText().trim().isEmpty() || txtTelefono.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Por favor, rellene todos los campos.");
+        } else if (cd.buscarClientePorDni(Integer.parseInt(txtDni.getText().trim())) != null) {
+            JOptionPane.showMessageDialog(this, "Ya existe un cliente con ese dni!");
         } else {
             cliente = new Cliente(Integer.parseInt(txtDni.getText()), txtApellido.getText(), txtNombre.getText(), txtDomicilio.getText(), txtTelefono.getText(), true);
             cd.guardarCliente(cliente);

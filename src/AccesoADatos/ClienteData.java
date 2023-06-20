@@ -112,4 +112,21 @@ public class ClienteData {
         return cliente;
     }
     
+    public Cliente buscarClientePorDni(int dni) {
+        Cliente cliente = null;
+        String sql = "SELECT * FROM cliente WHERE dni=?";
+        try {
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setInt(1, dni);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                cliente = new Cliente(rs.getInt("idCliente"), dni, rs.getString("apellido"), rs.getString("nombre"), rs.getString("domicilio"), rs.getString("telefono"), rs.getBoolean("estado"));
+            }
+            ps.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error: "+e.getMessage());
+        }
+        return cliente;
+    }
+    
 }
