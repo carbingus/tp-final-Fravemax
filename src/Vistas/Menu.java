@@ -1,6 +1,9 @@
 package Vistas;
 
 import javax.swing.JInternalFrame;
+import java.awt.Graphics;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 
 public class Menu extends javax.swing.JFrame {
 
@@ -14,7 +17,13 @@ public class Menu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        escritorio = new javax.swing.JDesktopPane();
+        ImageIcon icon = new ImageIcon(getClass().getResource("/Vistas/imagenes/fondo.png"));
+        Image image = icon.getImage();
+        escritorio = new javax.swing.JDesktopPane() {
+            public void paintComponent(Graphics g){
+                g.drawImage(image,0,0,getWidth(),getHeight(),this);
+            }
+        };
         barraMenu = new javax.swing.JMenuBar();
         menuClientes = new javax.swing.JMenu();
         vistaAgregarCliente = new javax.swing.JMenuItem();
