@@ -315,7 +315,7 @@ public class ProductoData {
     public List<Producto> listarProductosSinStock() {
         
         List<Producto> productos = new ArrayList();
-        String sql = "SELECT * FROM producto WHERE stock = 0";
+        String sql = "SELECT * FROM producto WHERE stock = 0 AND estado=1";
         
         try{
             
