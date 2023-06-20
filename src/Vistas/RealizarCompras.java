@@ -35,22 +35,33 @@ public class RealizarCompras extends javax.swing.JInternalFrame {
         setResizable(false);
         
         List<Proveedor> listaProveedores = pvd.listarProveedores();
+        
         Collections.sort(listaProveedores, new Comparator<Proveedor>() {
+            
             public int compare(Proveedor o1, Proveedor o2) {
                 return o1.toString().compareTo(o2.toString());
+                
             }
         });
+        
         for (Proveedor proveedor : listaProveedores) {
+            
             cmbProveedor.addItem(proveedor);
         }
         
         List<Producto> listaProductos = pd.listarProductos();
+        
         Collections.sort(listaProductos, new Comparator<Producto>() {
+            
             public int compare(Producto o1, Producto o2) {
+                
                 return o1.toString().compareTo(o2.toString());
+                
             }
         });
+        
         for (Producto producto : listaProductos) {
+            
             cmbProducto.addItem(producto);
         }
         
@@ -211,16 +222,22 @@ public class RealizarCompras extends javax.swing.JInternalFrame {
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         if (txtFecha.getDate() == null) {
+            
             JOptionPane.showMessageDialog(this, "Te falto elegir la fecha!");
+            
         } else {
+            
             Date date = txtFecha.getDate();
             LocalDate fecha = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            
             proveedor = (Proveedor)cmbProveedor.getSelectedItem();
             compra = new Compra(proveedor, fecha);
+            
             cd.guardarCompra(compra);
 
             int cantidad = Integer.parseInt(spinner.getValue().toString());
             double precioCosto = Double.parseDouble(spinner.getValue().toString())*producto.getPrecio();
+            
             detalleCompra = new DetalleCompra(cantidad, precioCosto, compra, producto);
             dc.guardarDetalleCompra(detalleCompra);
             

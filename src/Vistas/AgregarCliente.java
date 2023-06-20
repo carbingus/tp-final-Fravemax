@@ -164,15 +164,27 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        if (txtDni.getText().trim().isEmpty() || txtApellido.getText().trim().isEmpty() || txtNombre.getText().trim().isEmpty() || txtDomicilio.getText().trim().isEmpty() || txtTelefono.getText().trim().isEmpty()) {
+        if (txtDni.getText().trim().isEmpty() || txtApellido.getText().trim().isEmpty() || txtNombre.getText().trim().isEmpty()
+                || txtDomicilio.getText().trim().isEmpty() || txtTelefono.getText().trim().isEmpty()) {
+            
             JOptionPane.showMessageDialog(this, "Por favor, rellene todos los campos.");
+            
         } else if (cd.buscarClientePorDni(Integer.parseInt(txtDni.getText().trim())) != null) {
-            JOptionPane.showMessageDialog(this, "Ya existe un cliente con ese dni!");
+            
+            JOptionPane.showMessageDialog(this, "Ya existe un cliente con ese DNI.");
+            
         } else {
-            cliente = new Cliente(Integer.parseInt(txtDni.getText()), txtApellido.getText(), txtNombre.getText(), txtDomicilio.getText(), txtTelefono.getText(), true);
+            
+            cliente = new Cliente(Integer.parseInt(txtDni.getText()), txtApellido.getText(), 
+                    txtNombre.getText(), txtDomicilio.getText(), txtTelefono.getText(), 
+                    true);
+            
             cd.guardarCliente(cliente);
-            JOptionPane.showMessageDialog(this, "Cliente agregado con exito!");
+            
+//            JOptionPane.showMessageDialog(this, "Cliente agregado con exito!");
+            
             limpiar();
+            
             txtDni.requestFocus();
         }
     }//GEN-LAST:event_btnAgregarActionPerformed
@@ -183,56 +195,74 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
 
     private void txtDniKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDniKeyTyped
         char validar = evt.getKeyChar();
+        
         if (Character.isLetter(validar)) {
+            
             getToolkit().beep();
             evt.consume();
+            
             JOptionPane.showMessageDialog(this, "Ingrese solo números.");
+            
         }
     }//GEN-LAST:event_txtDniKeyTyped
 
     private void txtApellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoKeyTyped
         char validar = evt.getKeyChar();
+        
         if (Character.isLowerCase(validar)) {
+            
             String cadena = (""+validar).toUpperCase();
             validar = cadena.charAt(0);
             evt.setKeyChar(validar);
+            
         }
         if (Character.isDigit(validar)) {
+            
             getToolkit().beep();
             evt.consume();
             JOptionPane.showMessageDialog(this, "Ingrese solo letras.");
+            
         }
     }//GEN-LAST:event_txtApellidoKeyTyped
 
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
         char validar = evt.getKeyChar();
+        
         if (Character.isLowerCase(validar)) {
+            
             String cadena = (""+validar).toUpperCase();
             validar = cadena.charAt(0);
             evt.setKeyChar(validar);
+            
         }
         if (Character.isDigit(validar)) {
+            
             getToolkit().beep();
             evt.consume();
             JOptionPane.showMessageDialog(this, "Ingrese solo letras.");
+            
         }
     }//GEN-LAST:event_txtNombreKeyTyped
 
     private void txtTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoKeyTyped
         char validar = evt.getKeyChar();
         if (Character.isLetter(validar)) {
+            
             getToolkit().beep();
             evt.consume();
             JOptionPane.showMessageDialog(this, "Ingrese solo números.");
+            
         }
     }//GEN-LAST:event_txtTelefonoKeyTyped
 
     private void txtDomicilioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDomicilioKeyTyped
         char validar = evt.getKeyChar();
         if (Character.isLowerCase(validar)) {
+            
             String cadena = (""+validar).toUpperCase();
             validar = cadena.charAt(0);
             evt.setKeyChar(validar);
+            
         }
     }//GEN-LAST:event_txtDomicilioKeyTyped
 

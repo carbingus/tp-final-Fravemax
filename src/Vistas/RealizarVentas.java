@@ -220,8 +220,11 @@ public class RealizarVentas extends javax.swing.JInternalFrame {
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         if (txtFecha.getDate() == null) {
+            
             JOptionPane.showMessageDialog(this, "Te falto elegir la fecha!");
+            
         } else {
+            
             Date date = txtFecha.getDate();
             LocalDate fecha = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             cliente = (Cliente)cmbCliente.getSelectedItem();

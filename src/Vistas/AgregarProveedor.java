@@ -133,10 +133,14 @@ public class AgregarProveedor extends javax.swing.JInternalFrame {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         if (txtRazonSocial.getText().trim().isEmpty() || txtDomicilio.getText().trim().isEmpty() || txtTelefono.getText().trim().isEmpty()) {
+            
             JOptionPane.showMessageDialog(this, "Por favor, rellene todos los campos.");
+            
         } else {
+            
             proveedor = new Proveedor(txtRazonSocial.getText(), txtDomicilio.getText(), txtTelefono.getText(), true);
             pd.guardarProveedor(proveedor);
+            
             JOptionPane.showMessageDialog(this, "Proveedor agregado con exito!");
             limpiar();
             txtRazonSocial.requestFocus();
