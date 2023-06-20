@@ -70,7 +70,7 @@ public class RegistrarProducto extends javax.swing.JInternalFrame {
 
         jlblCateg.setText("Categoria:");
 
-        jcmbCateg.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Electrodomestico", "Muebles", "Higiene", "Miscelaneo" }));
+        jcmbCateg.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AIRE AC.", "ASPIRADORA", "COCINA", "CAFETERA", "FREZZER", "HELADERA", "LAVARROPA", "LICUADORA", "MICROONDAS", "OTRO" }));
         jcmbCateg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcmbCategActionPerformed(evt);
@@ -84,37 +84,38 @@ public class RegistrarProducto extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(44, 44, 44)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(115, 115, 115)
                         .addComponent(lblTitulo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jlblIconito))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(72, 72, 72)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblPrecio)
                             .addComponent(lblNombre)
-                            .addComponent(jlblCateg)
-                            .addComponent(btnAgregar))
+                            .addComponent(jlblCateg))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(btnSalir)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtNombre)
-                                    .addComponent(txtPrecio, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)))
-                            .addComponent(jcmbCateg, 0, 170, Short.MAX_VALUE))))
-                .addContainerGap(50, Short.MAX_VALUE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtNombre)
+                                .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jcmbCateg, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(66, 66, 66)
+                        .addComponent(btnAgregar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnSalir)))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblTitulo)
                     .addComponent(jlblIconito))
-                .addGap(18, 30, Short.MAX_VALUE)
+                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNombre)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -126,11 +127,11 @@ public class RegistrarProducto extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblPrecio)
                     .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAgregar)
-                    .addComponent(btnSalir))
-                .addContainerGap(49, Short.MAX_VALUE))
+                    .addComponent(btnSalir)
+                    .addComponent(btnAgregar))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         pack();
@@ -140,7 +141,7 @@ public class RegistrarProducto extends javax.swing.JInternalFrame {
         if (txtNombre.getText().trim().isEmpty() || txtPrecio.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Por favor, rellene todos los campos.");
         } else {
-            producto = new Producto(txtNombre.getText(), jcmbCateg.getSelectedItem().toString().toUpperCase(), Double.parseDouble(txtPrecio.getText()), 0, true);
+            producto = new Producto(txtNombre.getText(), jcmbCateg.getSelectedItem().toString(), Double.parseDouble(txtPrecio.getText()), 0, true);
             pd.guardarProducto(producto);
             JOptionPane.showMessageDialog(this, "Producto agregado con exito!");
             limpiar();
